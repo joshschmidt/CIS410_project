@@ -7,11 +7,13 @@ class Planet
 {
 private:
     //Population, object that describes behavior/preferences of planet's inhabitants 
-    float size;
     //Entities[]; need containers for different types of units
     float terrain;
     float weather;
     float gravity;
+    int x;
+    int y;
+    int z;
      
 
     
@@ -24,6 +26,9 @@ public:
     float getTerrain();
     float getWeather();
     float getGravity();
+    int getX();
+    int getY();
+    int getZ();
     void printPlanet();
 
 };
