@@ -14,6 +14,6 @@ class Galaxy
 		Galaxy(int seed, int id, int planetCount);
 		void printGalaxy();
 
-	};
-}
+};
+
 #endif
