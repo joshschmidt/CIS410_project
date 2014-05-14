@@ -3,8 +3,7 @@
 
 Galaxy::Galaxy(int seed, int id, int planetCount) {
 	cilk_for(int i = 0; i < planetCount; i++) {
-			_planets[i] = Planet(seed, i);
-		}
+		_planets[i] = Planet(seed, i);
 	}
 }
 
