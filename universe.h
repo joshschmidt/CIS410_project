@@ -11,7 +11,7 @@ class Universe
 		Galaxy ** galaxies; 
 
 	public:
-		Universe(int seed, int id);
+		Universe(int seed, int id, int length, int width, int height);
 		Galaxy getGalaxy(int galaxyId);
 		void printUniverse();
 
