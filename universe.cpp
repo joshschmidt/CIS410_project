@@ -13,8 +13,8 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 }
 
 Galaxy Universe::getGalaxy(int galaxyId) {
-	int x = galaxyId % length;
-	int z = galaxyId / length;
+	int x = galaxyId % _length;
+	int z = galaxyId / _width;
 	return _galaxies[x][z];
 }
 
