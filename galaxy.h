@@ -6,8 +6,8 @@
 class Galaxy
 {
 	private:
-		int id;
-		Planet planets[]; 
+		int _id;
+		Planet _planets[]; 
 	     
 
 	public:

@@ -8,23 +8,23 @@ float getRand() {
 Planet::Planet(int seed) {
 	srand (seed);
 	//population constructor
-	terrain = getRand();
-	weather = getRand();
-	gravity = getRand();
-	x = (rand()%(1000));
-	y = (rand()%(1000));
-	z = (rand()%(1000));
+	_terrain = getRand();
+	_weather = getRand();
+	_gravity = getRand();
+	_x = (rand()%(1000));
+	_y = (rand()%(1000));
+	_z = (rand()%(1000));
 }
 
 
-float Planet::getTerrain() { return terrain; }
-float Planet::getWeather() { return weather; }
-float Planet::getGravity() { return gravity; }
-int Planet::getX() { return x; }
-int Planet::getY() { return y; }
-int Planet::getZ() { return z; }
+float Planet::getTerrain() { return _terrain; }
+float Planet::getWeather() { return _weather; }
+float Planet::getGravity() { return _gravity; }
+int Planet::getX() { return _x; }
+int Planet::getY() { return _y; }
+int Planet::getZ() { return _z; }
 
 
 void Planet::printPlanet() {
-	printf("Location: (%d, %d, %d) \nTerrain: %f \nWeather: %f \nGravity: %f \n\n", x, y, z, terrain, weather, gravity);
+	printf("Location: (%d, %d, %d) \nTerrain: %f \nWeather: %f \nGravity: %f \n\n", _x, _y, _z, _terrain, _weather, _gravity);
 }

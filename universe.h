@@ -9,8 +9,11 @@ class Universe
 {
 
 	private:
-		int id;
-		Galaxy ** galaxies; 
+		int _id;
+		int _length;
+		int _width;
+		int _height;
+		Galaxy ** _galaxies; 
 
 	public:
 		Universe(int seed, int id, int length, int width, int height);

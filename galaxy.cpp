@@ -3,13 +3,13 @@
 
 Galaxy::Galaxy(int seed, int planetCount) {
 	cilk_for(int i = 0; i < planetCount; i++) {
-			planets[i] = Planet(seed, i);
+			_planets[i] = Planet(seed, i);
 		}
 	}
 }
 
 Planet Galaxy::getPlanet(int planetId){
-	return planets[planetId];
+	return _planets[planetId];
 }
 
 void Galaxy::printGalaxy() {

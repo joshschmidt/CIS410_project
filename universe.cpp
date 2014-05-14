@@ -1,9 +1,13 @@
 #include "universe.h"    
 
 Universe::Universe(int seed, int id, int length, int width, int height) {
+	_length = length;
+	_width = width;
+	_height = height;
+
 	for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
-			galaxies[x][z] = Galaxy(seed, x * z, 1000);
+			_galaxies[x][z] = Galaxy(seed, x * z, 1000);
 		}
 	}
 }
@@ -11,7 +15,7 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 Galaxy Universe::getGalaxy(int galaxyId) {
 	int x = galaxyId % length;
 	int z = galaxyId / length;
-	return galaxies[x][z];
+	return _galaxies[x][z];
 }
 
 //alternate universes!?

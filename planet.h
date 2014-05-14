@@ -6,13 +6,13 @@
 class Planet
 {
 	private:
-		int id;
-		float terrain;
-		float weather;
-		float gravity;
-		int x;
-		int y;
-		int z;
+		int _id;
+		float _terrain;
+		float _weather;
+		float _gravity;
+		int _x;
+		int _y;
+		int _z;
 		//Population, object that describes behavior/preferences of planet's inhabitants 
 		//Entities[]; need containers for different types of units
 	     
