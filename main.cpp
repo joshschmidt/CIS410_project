@@ -1,25 +1,10 @@
-#include "planet.h"
+#include "universe.h"
 #include <stdio.h>      
 #include <stdlib.h> 
 #include <cilk/cilk.h>
 
 
 int main() {
-
-
-	cilk_for(int i = 0; i < 1000; i++) {
-		Planet p = Planet(i);
-		p.printPlanet();
-	}
-
-
-
-
-
-
-
-
-
-
-
+	Universe universe = Universe(1, 1);
+	universe.galaxies[1][1].planets[1].printPlanet();
 }
