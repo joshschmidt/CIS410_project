@@ -6,5 +6,5 @@
 
 int main() {
 	Universe universe = Universe(1, 1);
-	universe.galaxies[1][1].planets[1].printPlanet();
+	universe.getGalaxy(0).getPlanet(0).printPlanet();
 }
