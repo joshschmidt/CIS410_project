@@ -8,9 +8,10 @@ float getRand() {
 }
 
 
-Planet::Planet(int seed) {
+Planet::Planet(int seed, int id) {
 	srand (seed);
 	//population constructor
+	_id = id;
 	_terrain = getRand();
 	_weather = getRand();
 	_gravity = getRand();
