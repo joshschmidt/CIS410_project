@@ -11,8 +11,9 @@ class Universe
 		Galaxy galaxies[][]; 
 
 	public:
-	    Universe(int seed, int id);
-	    void printUniverse();
+		Universe(int seed, int id);
+		Galaxy getGalaxy(int galaxyId);
+		void printUniverse();
 
 };
 

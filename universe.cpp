@@ -15,4 +15,8 @@ void Universe::printUniverse() {
 }
 
 
-
+Galaxy Universe::getGalaxy(int galaxyId) {
+	int x = galaxyId % length;
+	int z = galaxyId / length;
+	return galaxies[x][z];
+}
