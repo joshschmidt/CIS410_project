@@ -8,7 +8,7 @@ class Universe
 
 	private:
 		int id;
-		Galaxy galaxies[][]; 
+		Galaxy ** galaxies; 
 
 	public:
 		Universe(int seed, int id);
