@@ -1,5 +1,7 @@
 #include "universe.h"    
-
+#include <stdio.h>      
+#include <stdlib.h>     
+#include <time.h> 
 Universe::Universe(int seed, int id, int length, int width, int height) {
 	_length = length;
 	_width = width;

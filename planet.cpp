@@ -1,4 +1,7 @@
 #include "planet.h"    
+#include <stdio.h>      
+#include <stdlib.h>     
+#include <time.h> 
 
 float getRand() {
 	return static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
