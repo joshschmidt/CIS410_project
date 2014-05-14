@@ -8,6 +8,9 @@ Galaxy::Galaxy(int seed, int planetCount) {
 	}
 }
 
+Planet Galaxy::getPlanet(int planetId){
+	return planets[planetId];
+}
 
 void Galaxy::printGalaxy() {
 	printf("WOAH");

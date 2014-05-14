@@ -12,6 +12,7 @@ class Galaxy
 
 	public:
 		Galaxy(int seed, int id, int planetCount);
+		Planet getPlanet(int planetId);
 		void printGalaxy();
 
 };
