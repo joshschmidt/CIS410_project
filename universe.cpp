@@ -6,12 +6,9 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	_id = id;
 	_length = length;
 	_width = width;
-	_height = height;
+	_height = height;git p
 	_galaxies = new Galaxy*[length]; 
 
-	for (int i = 0; i < width; ++i) {
-		_galaxies[i] = new Galaxy[width]; 
-	}
 	// Create 2D array of pointers:
 	_galaxies = new (int**)[rows];
 	for (int i = 0; i < length; ++i) {
