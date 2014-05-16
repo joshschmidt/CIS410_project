@@ -2,6 +2,8 @@
 #include <stdio.h>      
 #include <stdlib.h>     
 #include <time.h> 
+#include <cilk/cilk.h>
+
 Universe::Universe(int seed, int id, int length, int width, int height) {
 	srand (seed);
 	_id = id;
@@ -10,7 +12,7 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	_height = height;
 
 	_galaxies = new Galaxy**[length];
-	for (int i = 0; i < length; ++i) {
+	cilk_for(int i = 0; i < length; ++i) {
   		_galaxies[i] = new Galaxy*[width];
 	}
 
