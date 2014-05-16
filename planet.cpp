@@ -9,7 +9,7 @@ float getRand() {
 
 
 Planet::Planet(int seed, int id, int galaxyId) {
-	;
+	//srand (seed);
 	//population constructor
 	_id = id;
 	_galaxyId = galaxyId;
