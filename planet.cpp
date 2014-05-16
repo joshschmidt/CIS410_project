@@ -8,10 +8,11 @@ float getRand() {
 }
 
 
-Planet::Planet(int seed, int id) {
+Planet::Planet(int seed, int id, int galaxyId) {
 	srand (seed);
 	//population constructor
 	_id = id;
+	_galaxyId = galaxyId;
 	_terrain = getRand();
 	_weather = getRand();
 	_gravity = getRand();
@@ -30,5 +31,6 @@ int Planet::getZ() { return _z; }
 
 
 void Planet::printPlanet() {
+	printf("(Planet Id: %d)(Galaxy Id: %d)", _id, _galaxyId);
 	printf("Location: (%d, %d, %d) \nTerrain: %f \nWeather: %f \nGravity: %f \n\n", _x, _y, _z, _terrain, _weather, _gravity);
 }

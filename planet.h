@@ -7,6 +7,7 @@ class Planet
 {
 	private:
 		int _id;
+		int _galaxyId;
 		float _terrain;
 		float _weather;
 		float _gravity;
@@ -18,7 +19,7 @@ class Planet
 	     
 
 	public:
-		Planet(int seed, int id);
+		Planet(int seed, int id, int galaxyId);
 		float getTerrain();
 		float getWeather();
 		float getGravity();

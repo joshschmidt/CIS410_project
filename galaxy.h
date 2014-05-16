@@ -7,7 +7,7 @@ class Galaxy
 {
 	private:
 		int _id;
-		Planet _planets[]; 
+		Planet * _planets[]; 
 	     
 
 	public:

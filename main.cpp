@@ -5,6 +5,5 @@
 
 
 int main() {
-	Universe universe = Universe(1, 1, 100, 100, 100);
-	universe.getGalaxy(0).getPlanet(0).printPlanet();
+	Universe universe = Universe(1, 0, 5, 5, 5);
 }

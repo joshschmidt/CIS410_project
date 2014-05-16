@@ -6,16 +6,19 @@
 Galaxy::Galaxy(int seed, int id, int planetCount) {
 	_id = id;
 	for(int i = 0; i < planetCount; i++) {
-		_planets[i] = Planet(seed, i);
+		printf("(i:%d)", i);
+		_planets[i] = new Planet(seed, i, _id);
+		_planets[i]->printPlanet();
+		
 	}
 }
 
 Planet Galaxy::getPlanet(int planetId){
-	return _planets[planetId];
+	return *_planets[planetId];
 }
 
 void Galaxy::printGalaxy() {
-	printf("WOAH");
+	printf("(Galaxy Id: %d)", _id);
 }
 
 

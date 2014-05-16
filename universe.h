@@ -12,7 +12,7 @@ class Universe
 		int _length;
 		int _width;
 		int _height;
-		Galaxy ** _galaxies; 
+		Galaxy *** _galaxies; 
 
 	public:
 		Universe(int seed, int id, int length, int width, int height);
