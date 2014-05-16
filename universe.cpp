@@ -8,9 +8,9 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	_width = width;
 	_height = height;
 
-	*_galaxies = new (Galaxy**)[length];
+	*_galaxies = new Galaxy**[length];
 	for (int i = 0; i < length; ++i) {
-  		*_galaxies[i] = new (Galaxy**)[width];
+  		_galaxies[i] = new Galaxy**[width];
 	}
 
 	for(int x = 0; x < length; x++) {
