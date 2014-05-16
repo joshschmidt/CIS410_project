@@ -3,7 +3,7 @@
 #include <stdlib.h>     
 #include <time.h> 
 Universe::Universe(int seed, int id, int length, int width, int height) {
-	srand (seed)
+	srand (seed);
 	_id = id;
 	_length = length;
 	_width = width;
