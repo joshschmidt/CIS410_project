@@ -12,11 +12,11 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	_height = height;
 
 	_galaxies = new Galaxy**[length];
-	cilk_for(int i = 0; i < length; ++i) {
+	for (int i = 0; i < length; ++i) {
   		_galaxies[i] = new Galaxy*[width];
 	}
 
-	for(int x = 0; x < length; x++) {
+	cilk_for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
 			_galaxies[x][z] = new Galaxy(seed, (x * length) + z, 5);
 		}
