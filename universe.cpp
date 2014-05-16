@@ -17,7 +17,6 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
 			_galaxies[x][z] = new Galaxy(seed, (x * length) + z, 5);
-			_galaxies[x][z]->printGalaxy();
 		}
 	}
 }
