@@ -16,7 +16,7 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	}
 	//cilk_for here but it causes a crash
 	//works serially oddly
-	cilk_for(int x = 0; x < length; x++) {
+	for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
 			_galaxies[x][z] = new Galaxy(seed, (x * length) + z, 5);
 		}
