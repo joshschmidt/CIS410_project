@@ -14,8 +14,7 @@ Universe::Universe(int seed, int id, int length, int width, int height) {
 	for (int i = 0; i < length; ++i) {
   		_galaxies[i] = new Galaxy*[width];
 	}
-	//cilk_for here but it causes a crash
-	//works serially oddly
+
 	for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
 			_galaxies[x][z] = new Galaxy(seed, (x * length) + z, 5);

@@ -1,4 +1,6 @@
 #include "universe.h"
+#include "galaxyManager.h"
+#include "event.h"
 #include <stdio.h>      
 #include <stdlib.h> 
 #include <iostream>
@@ -6,5 +8,10 @@
 
 
 int main() {
-	Universe universe = Universe(1, 1, 5, 5, 5);
+	Galaxy g = Galaxy(1,1,1);
+	GalaxyManager gm = GalaxyManager(&g);
+	Event e = Event(1,1,1,1);
+	gm.addEvent(e);
+	gm.nextEvent().printEvent();
+	Universe universe = Universe(1, 1, 1000, 1000, 1000);
 }
