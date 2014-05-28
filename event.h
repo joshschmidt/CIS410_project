@@ -16,6 +16,8 @@ class Event
 		Event(int type, float time, int pID, int gID);
 		float getTime();
 		void printEvent();
+		int getpID(){return _planetID;};
+		int getType(){return _type;};
 		
 
 };

@@ -7,8 +7,8 @@ class Population
 		int flood, civilian, military;
 	public:
 		Population(int setFlood, int setCivilian, int setMilitary);
-		void attack(Population* attackers,
-			  Population* defenders,
-			  float planetBonus);
+		int getFlood(){return flood;};
+		int getCiv(){return civilian;};
+		int getMilitary(){return military;};
 };
 #endif

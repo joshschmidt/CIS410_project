@@ -28,6 +28,9 @@ class GalaxyManager
 		GalaxyManager(Galaxy * g);
 		void addEvent(Event e);
 		Event nextEvent();
+		void handleEvent(Event e);
+		void battle(int pID);
+
 		
 
 };

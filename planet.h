@@ -1,12 +1,15 @@
 #ifndef PLANET_H
 #define PLANET_H
 
+#include "population.h"
+
 
 
 class Planet
 {
 	private:
 		int _id;
+		Population * population;
 		int _galaxyId;
 		float _terrain;
 		float _weather;
@@ -27,6 +30,7 @@ class Planet
 		int getY();
 		int getZ();
 		void printPlanet();
+		Population * getPopulation();
 		//get population attributes
 
 };
