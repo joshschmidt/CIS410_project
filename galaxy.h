@@ -14,6 +14,7 @@ class Galaxy
 		Galaxy(int seed, int id, int planetCount);
 		Planet getPlanet(int planetId);
 		void printGalaxy();
+		double getDistance(int id1, int id2);
 
 };
 
