@@ -12,3 +12,11 @@ Event::Event(int type, float time, int pID, int gID) {
 	_galaxyID = gID;
 }
 
+void Event::printEvent() {
+	printf("Event: %d %f %d %d", _type, _time, _planetID, _galaxyID);
+}
+
+float Event::getTime() {
+	return _time;
+}
+

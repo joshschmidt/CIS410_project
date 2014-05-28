@@ -6,9 +6,10 @@
 
 Galaxy::Galaxy(int seed, int id, int planetCount) {
 	_id = id;
+	_planets = new Planet*[planetCount];
 	for(int i = 0; i < planetCount; i++) {
 		_planets[i] = new Planet(seed, i, _id);
-		_planets[i]->printPlanet();
+		//_planets[i]->printPlanet();
 		
 	}
 }

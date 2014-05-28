@@ -14,6 +14,8 @@ class Event
 
 	public:
 		Event(int type, float time, int pID, int gID);
+		float getTime();
+		void printEvent();
 		
 
 };
