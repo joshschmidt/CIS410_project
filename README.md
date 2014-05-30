@@ -19,8 +19,11 @@ TODO
 Event definitions -- Marc\Josh
 
 Move interplanet
+
 Move intergalactic
+
 Battle -- Marc
+
 Messages {SOS, }
   
 
