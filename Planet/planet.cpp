@@ -35,7 +35,7 @@ Planet::Planet(int seed, int id, int galaxyId) {
 	_z = (rand()%(1000));
 }
 
-
+//return a planet's stats and location
 float Planet::getTerrain() { return _terrain; }
 float Planet::getWeather() { return _weather; }
 float Planet::getGravity() { return _gravity; }
@@ -50,5 +50,16 @@ void Planet::printPlanet() {
 	printf("Location: (%d, %d, %d) \nTerrain: %f \nWeather: %f \nGravity: %f \n\n", _x, _y, _z, _terrain, _weather, _gravity);
 }
 
-
+//return the planet's population object
 Population * Planet::getPopulation() { return population; }
+
+//return the planet's flood population
+int Planet::getFloodPopulation() { return population->getFlood(); }
+
+//return the planet's civilian population
+int Planet::getCivilianPopulation() { return population->getCiv(); }
+
+//return the planet's military population
+int Planet::getMilitaryPopulation() { return population->getMilitary(); }
+
+

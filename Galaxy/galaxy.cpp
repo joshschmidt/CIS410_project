@@ -3,9 +3,11 @@
 #include <stdlib.h>     
 #include <time.h>
 #include <math.h> 
+#include <cilk/cilk.h>
 
 Galaxy::Galaxy(int seed, int id, int planetCount) {
 	_id = id;
+	_planetCount = planetCount;
 	_planets = new Planet*[planetCount];
 	for(int i = 0; i < planetCount; i++) {
 		_planets[i] = new Planet(seed, i, _id);
@@ -32,6 +34,21 @@ double Galaxy::getDistance(int id1, int id2) {
 
 void Galaxy::printGalaxy() {
 	printf("(Galaxy Id: %d)", _id);
+}
+
+//return a struct that contains the population counts off all the planets in the galaxy
+galaxyPopulationCounts Galaxy::getPopulationCounts(){
+	//declare the struct
+	galaxyPopulationCounts currentPopulation;
+
+	//itterate through each planet and sum up the populations, storing in the struct currentPopulation
+	cilk_for(int i = 0; i < _planetCount; i++){
+		currentPopulation.flood += _planets[i]->getFloodPopulation();
+		currentPopulation.civilian += _planets[i]->getCivilianPopulation();
+		currentPopulation.military += _planets[i]->getMilitaryPopulation();
+	}
+	//return the struct
+	return currentPopulation;
 }
 
 

@@ -9,6 +9,7 @@ class Planet
 {
 	private:
 		int _id;
+		int _planetCount;
 		Population * population;
 		int _galaxyId;
 		float _terrain;

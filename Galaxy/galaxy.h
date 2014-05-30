@@ -1,12 +1,14 @@
 #ifndef GALAXY_H
 #define GALAXY_H
 #include "../Planet/planet.h"
+#include "../structs.h"
 
 
 class Galaxy
 {
 	private:
 		int _id;
+		int _planetCount;
 		Planet ** _planets; 
 	     
 
@@ -15,6 +17,7 @@ class Galaxy
 		Planet * getPlanet(int planetId);
 		void printGalaxy();
 		double getDistance(int id1, int id2);
+		galaxyPopulationCounts getPopulationCounts();
 
 };
 
