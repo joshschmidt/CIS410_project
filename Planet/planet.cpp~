@@ -57,9 +57,9 @@ Population * Planet::getPopulation() { return population; }
 int Planet::getFloodPopulation() { return population->getFlood(); }
 
 //return the planet's civilian population
-int Planet::getCivilianPopulation() { return population->getCiv(); }
+int Planet::getCivilianPopulation() { return population.getCiv(); }
 
 //return the planet's military population
-int Planet::getMilitaryPopulation() { return population->getMilitary(); }
+int Planet::getMilitaryPopulation() { return population.getMilitary(); }
 
 
