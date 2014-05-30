@@ -13,7 +13,7 @@ planet.o: Planet/planet.cpp Planet/planet.h
 	icpc -g -std=c++11 -c Planet/planet.cpp -Wall -Wextra -lcilkrts
 
 universe.o: Universe/universe.cpp Universe/universe.h
-	icpc -g -std=c++11 -c universe.cpp -Wall -Wextra -lcilkrts
+	icpc -g -std=c++11 -c Universe/universe.cpp -Wall -Wextra -lcilkrts
 
 event.o: Event/event.cpp Event/event.h
 	icpc -g -std=c++11 -c Event/event.cpp -Wall -Wextra -lcilkrts
