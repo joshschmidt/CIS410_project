@@ -21,8 +21,7 @@ Event definitions -- Marc\Josh
 Move interplanet
 Move intergalactic
 Battle -- Marc
-Messages
-  SOS
+Messages {SOS, }
   
 
 Population generate own bahavior based on parameters --Evan
