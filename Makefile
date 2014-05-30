@@ -1,18 +1,18 @@
 all: population.o galaxy.o planet.o universe.o main.o sim
 
-population.o: population.cpp population.h 
-	icpc -g -std=c++11 -c population.cpp -Wall -Wextra -lcilkrts
+population.o: Population/population.cpp Population/population.h 
+	icpc -g -std=c++11 -c Population/population.cpp -Wall -Wextra -lcilkrts
 
-galaxyManager.o: galaxyManager.cpp galaxyManager.h
-	icpc -g -std=c++11 -c galaxyManager.cpp -Wall -Wextra -lcilkrts
+galaxyManager.o: Galaxy/galaxyManager.cpp Galaxy/galaxyManager.h
+	icpc -g -std=c++11 -c Galaxy/galaxyManager.cpp -Wall -Wextra -lcilkrts
 
-galaxy.o: galaxy.cpp galaxy.h
-	icpc -g -std=c++11 -c galaxy.cpp -Wall -Wextra -lcilkrts
+galaxy.o: Galaxy/galaxy.cpp Galaxy/galaxy.h
+	icpc -g -std=c++11 -c Galaxy/galaxy.cpp -Wall -Wextra -lcilkrts
 
-planet.o: planet.cpp planet.h
-	icpc -g -std=c++11 -c planet.cpp -Wall -Wextra -lcilkrts
+planet.o: Planet/planet.cpp Planet/planet.h
+	icpc -g -std=c++11 -c Planet/planet.cpp -Wall -Wextra -lcilkrts
 
-universe.o: universe.cpp universe.h
+universe.o: Universe/universe.cpp Universe/universe.h
 	icpc -g -std=c++11 -c universe.cpp -Wall -Wextra -lcilkrts
 
 event.o: event.cpp event.h
