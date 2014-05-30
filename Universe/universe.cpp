@@ -4,11 +4,10 @@
 #include <time.h> 
 #include <cilk/cilk.h>
 
-Universe::Universe(int seed, int id, int length, int width, int height) {
+Universe::Universe(int seed, int id, int length, int width) {
 	_id = id;
 	_length = length;
 	_width = width;
-	_height = height;
 
 	_galaxies = new Galaxy**[length];
 	for (int i = 0; i < length; ++i) {
