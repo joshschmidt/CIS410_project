@@ -1,6 +1,6 @@
 #ifndef UNIVERSE_H
 #define UNIVERSE_H
-#include "Galaxy/galaxy.h"
+#include "../Galaxy/galaxy.h"
 
   
 
