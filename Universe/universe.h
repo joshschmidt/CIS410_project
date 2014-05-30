@@ -11,11 +11,10 @@ class Universe
 		int _id;
 		int _length;
 		int _width;
-		int _height;
 		Galaxy *** _galaxies; 
 
 	public:
-		Universe(int seed, int id, int length, int width, int height);
+		Universe(int seed, int id, int length, int width);
 		Galaxy getGalaxy(int galaxyId);
 		void printUniverse();
 

@@ -46,7 +46,6 @@ void GalaxyManager::timing() {
 	min_time_next_event = nextEvent.getTime();
 	next_event_type = nextEvent.getType();
 	sim_time = min_time_next_event;
-	pq.pop();
 
 }
 
