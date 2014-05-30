@@ -14,8 +14,8 @@ Galaxy::Galaxy(int seed, int id, int planetCount) {
 	}
 }
 
-Planet * Galaxy::getPlanet(int planetId){
-	return _planets[planetId];
+Planet Galaxy::getPlanet(int planetId){
+	return *_planets[planetId];
 }
 
 double Galaxy::getDistance(int id1, int id2) {

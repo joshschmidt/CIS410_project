@@ -12,7 +12,7 @@ class Galaxy
 
 	public:
 		Galaxy(int seed, int id, int planetCount);
-		Planet * getPlanet(int planetId);
+		Planet getPlanet(int planetId);
 		void printGalaxy();
 		double getDistance(int id1, int id2);
 

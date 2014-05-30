@@ -8,11 +8,5 @@
 
 
 int main() {
-	Galaxy g = Galaxy(1,1,1);
-	GalaxyManager gm = GalaxyManager(&g);
-	Event e = Event(1,1,1,1);
-	gm.addEvent(e);
-	Universe universe = Universe(1, 1, 1000, 1000, 1000);
-	gm.nextEvent().printEvent();
-	Universe universe = Universe(1, 1, 1000, 1000);
+	
 }

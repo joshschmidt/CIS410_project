@@ -32,10 +32,63 @@ void GalaxyManager::handleEvent(Event e) {
 }
 
 void GalaxyManager::battle(int pID) {
-	Planet p = galaxy->getPlanet(pID); 
-	float w = p.getWeather();
-	float t = p.getTerrain();
-	float g = p.getGravity();
+	Planet * p = galaxy->getPlanet(pID);
+ 
+	float weather = p->getWeather() * 2;
+	float terrain = p->getTerrain() * 2;
+	float gravity = p->getGravity() * 2;
+
+	Population * pop = p->getPopulation();
+
+	int flood = pop->getFlood();
+	int civ = pop->getCiv();
+	int mil = pop->getMilitary();
+
+	int humanPower, floodPower = 0;
+
+	
+
+	humanPower = mil + (.25 * civ) + (10 * weather) + (10 * terrain) + (10 * gravity);
+	floodPower = flood + (10 / weather) + (10 / terrain) + (10 / gravity);
+
+
+	if(humanPower > floodPower) {
+		int diff = humanPower - floodPower;
+		if(flood - diff < 0) {
+			flood = 0;
+			mil = mil * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		}
+
+		else {
+			flood = flood - diff;
+			mil = mil * .75;
+		}		
+
+	}
+
+	else {
+		int diff = floodPower - humanPower;
+		if(mil - diff < 0) {
+			mil = 0;
+			flood = flood * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			flood += civ * .75;
+			civ = 0;
+		}
+
+		else {
+			mil = mil - diff;
+			flood = flood * .75;
+	
+		}
+	}
+
+	pop->setMilitary(mil);
+	pop->setFlood(flood);
+	pop->setCiv(civ);
+	
+
+	
+	
 
 }
 

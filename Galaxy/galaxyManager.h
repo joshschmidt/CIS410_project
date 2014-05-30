@@ -2,6 +2,7 @@
 #define GALAXYMANAGER_H
 #include "../Event/event.h"
 #include "../Galaxy/galaxy.h"
+#include "../Population/population.h"
 #include <iostream>
 #include <queue>
 #include <iomanip>
