@@ -1,7 +1,7 @@
 #ifndef GALAXYMANAGER_H
 #define GALAXYMANAGER_H
-#include "event.h"
-#include "galaxy.h"
+#include "Event/event.h"
+#include "Galaxy/galaxy.h"
 #include <iostream>
 #include <queue>
 #include <iomanip>

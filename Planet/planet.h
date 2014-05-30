@@ -1,7 +1,7 @@
 #ifndef PLANET_H
 #define PLANET_H
 
-#include "population.h"
+#include "Population/population.h"
 
 
 

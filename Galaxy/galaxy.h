@@ -1,6 +1,6 @@
 #ifndef GALAXY_H
 #define GALAXY_H
-#include "planet.h"
+#include "Planet/planet.h"
 
 
 class Galaxy
