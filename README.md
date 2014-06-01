@@ -10,7 +10,11 @@ INSTALL SDL!!!
 http://www.libsdl.org/release/SDL2-2.0.3.tar.gz
 
 
-Unzip and run ./configure prefix=$HOME/sdl
+Unzip and run the following commands in the terminal!
+
+./configure prefix=$HOME/sdl
+
+export LD_LIBRARY_PATH=/home/users/YOUR_USERNAME_HERE/sdl/lib
 
 
 TODO
