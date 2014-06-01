@@ -18,7 +18,6 @@ int main() {
 	GalaxyManager gm = GalaxyManager(&g);
 	Event e = Event(1,1,1,1);
 	gm.addEvent(e);
-	gm.nextEvent().printEvent();
 	Universe universe = Universe(1, 1, 1000, 1000);
 
 	const int SCREEN_WIDTH = 640;
@@ -36,7 +35,18 @@ int main() {
 	}
 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF ); 
 	SDL_RenderClear( gRenderer );
-
+	
+	bool loop = true;
+ 
+	while (loop)
+	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				loop = false;
+		}
+	}
 
 	return 0;
 }
