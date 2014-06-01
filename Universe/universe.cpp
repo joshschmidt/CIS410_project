@@ -32,4 +32,8 @@ void Universe::printUniverse() {
 	printf("Number of Universes: 1");
 }
 
+//alternate universes!?
+void Universe::drawUniverse() {
+	printf("Number of Universes: 1");
+}
 

@@ -17,6 +17,7 @@ class Universe
 		Universe(int seed, int id, int length, int width);
 		Galaxy getGalaxy(int galaxyId);
 		void printUniverse();
+		void drawUniverse();
 
 };
 

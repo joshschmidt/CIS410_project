@@ -22,7 +22,7 @@ main.o: main.cpp
 	icpc -g -std=c++11 -c main.cpp -Wall -Wextra -lcilkrts
 
 sim:    main.o universe.o planet.o galaxy.o population.o event.o galaxyManager.o
-	icpc -g -std=c++11 galaxy.o universe.o planet.o population.o galaxyManager.o event.o main.o -o sim
+	icpc -g -std=c++11 galaxy.o universe.o planet.o population.o galaxyManager.o event.o main.o -o sim -L/home/users/mknowle2/sdl/lib -lSDL2
 
 clean:
 	rm sim *.o
