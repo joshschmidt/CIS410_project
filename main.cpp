@@ -14,7 +14,6 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 int main() {
-<<<<<<< HEAD
 	Galaxy g = Galaxy(1,1,1);
 	GalaxyManager gm = GalaxyManager(&g);
 	Event e = Event(1,1,1,1);
@@ -40,7 +39,4 @@ int main() {
 
 
 	return 0;
-=======
-	
->>>>>>> b9fe310cfd256fa9ad23b4a828e99c92ef48d652
 }
