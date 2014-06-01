@@ -13,12 +13,19 @@ SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* renderer = NULL;
 
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
 void Render(){
-	// Clear the window and make it all red
-	SDL_RenderClear( renderer );
-	 
-	// Render the changes above
-	SDL_RenderPresent( renderer);
+	SDL_RenderClear(renderer);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );
+	SDL_Rect screen;
+	screen.x = 0;
+	screen.y = 0;
+	screen.w = SCREEN_WIDTH;
+	screen.h = SCREEN_HEIGHT;
+	SDL_RenderFillRect(renderer, &screen);
+	SDL_RenderPresent(renderer);
 }
 
 int main() {
@@ -28,8 +35,7 @@ int main() {
 	gm.addEvent(e);
 	Universe universe = Universe(1, 1, 1000, 1000);
 
-	const int SCREEN_WIDTH = 640;
-	const int SCREEN_HEIGHT = 480;
+	
 
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
