@@ -2,6 +2,7 @@
 #define GALAXYMANAGER_H
 #include "../Event/event.h"
 #include "../Galaxy/galaxy.h"
+#include "../Population/population.h"
 #include <iostream>
 #include <queue>
 #include <iomanip>
@@ -21,15 +22,21 @@ class GalaxyManager
 {
 	private:
 		Galaxy * galaxy;
+		float sim_time;
+		float min_time_next_event;
+		int next_event_type;
+		
+		 
 		std::priority_queue<Event, std::vector<Event>, CompareEvent> pq;
 	     
 
 	public:
 		GalaxyManager(Galaxy * g);
 		void addEvent(Event e);
-		Event nextEvent();
 		void handleEvent(Event e);
 		void battle(int pID);
+		void timing();
+		void advanceSim(int time);
 
 		
 
