@@ -8,10 +8,18 @@
 
 
 //The window we'll be rendering to
-SDL_Window* gWindow = NULL;
+SDL_Window* window = NULL;
 
 //The window renderer
-SDL_Renderer* gRenderer = NULL;
+SDL_Renderer* renderer = NULL;
+
+void Render(){
+	// Clear the window and make it all red
+	SDL_RenderClear( renderer );
+	 
+	// Render the changes above
+	SDL_RenderPresent( renderer);
+}
 
 int main() {
 	Galaxy g = Galaxy(1,1,1);
@@ -28,13 +36,13 @@ int main() {
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 	}
 	
-	gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-	if( gWindow == NULL )
+	window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+	if( window == NULL )
 	{
 		printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
 	}
-	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF ); 
-	SDL_RenderClear( gRenderer );
+	SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF ); 
+	SDL_RenderClear( renderer );
 	
 	bool loop = true;
  
@@ -46,6 +54,7 @@ int main() {
 			if (event.type == SDL_QUIT)
 				loop = false;
 		}
+		Render();
 	}
 
 	return 0;
