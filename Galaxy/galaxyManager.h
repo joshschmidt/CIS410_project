@@ -22,6 +22,7 @@ class GalaxyManager
 {
 	private:
 		Galaxy * galaxy;
+		Event next_event;
 		float sim_time;
 		float min_time_next_event;
 		int next_event_type;

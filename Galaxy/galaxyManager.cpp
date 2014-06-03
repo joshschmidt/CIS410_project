@@ -23,7 +23,9 @@ void GalaxyManager::handleEvent(Event e) {
 
 		case 0:
 			battle(e.getpID());
-
+			break;
+		case 1:
+			
 
 
 
@@ -95,7 +97,7 @@ void GalaxyManager::battle(int pID) {
 
 void GalaxyManager::timing() {
 
-	Event nextEvent = pq.top();
+	next_event = pq.top();
 	min_time_next_event = nextEvent.getTime();
 	next_event_type = nextEvent.getType();
 	sim_time = min_time_next_event;
@@ -104,6 +106,18 @@ void GalaxyManager::timing() {
 }
 
 void GalaxyManager::advanceSim(int time) {
+
+	while(sim_time < time) {
+
+		timing();
+		handleEvent(next_event);		
+	
+
+	}
+
+
+
+
 
 
 }
