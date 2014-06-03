@@ -1,4 +1,4 @@
-#include "galaxyManager.h"    
+#include "galaxyManager.h"
 #include <stdio.h>      
 #include <stdlib.h>     
 #include <time.h> 
@@ -24,7 +24,6 @@ void GalaxyManager::handleEvent(Event e) {
 		case 0:
 			battle(e.getpID());
 			break;
-		case 1:
 			
 
 
@@ -97,10 +96,11 @@ void GalaxyManager::battle(int pID) {
 
 void GalaxyManager::timing() {
 
-	next_event = pq.top();
+	Event nextEvent = pq.top();
 	min_time_next_event = nextEvent.getTime();
 	next_event_type = nextEvent.getType();
 	sim_time = min_time_next_event;
+	handleEvent(nextEvent);
 	pq.pop();
 
 }
@@ -109,8 +109,7 @@ void GalaxyManager::advanceSim(int time) {
 
 	while(sim_time < time) {
 
-		timing();
-		handleEvent(next_event);		
+		timing();		
 	
 
 	}
