@@ -8,4 +8,11 @@ struct galaxyPopulationCounts
 	int military;
 };
 
+
+struct populationAnalysis
+{
+	int flood[1000][1000];
+	int civilian[1000][1000];
+};
+
 #endif

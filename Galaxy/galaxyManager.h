@@ -4,10 +4,12 @@
 #include "../Galaxy/galaxy.h"
 #include "../Population/population.h"
 #include "../Universe/universe.h"
+#include "../structs.h"
 #include <iostream>
 #include <queue>
 #include <iomanip>
 #include <vector>
+
 
 
 
@@ -35,6 +37,7 @@ class GalaxyManager
 
 	public:
 		GalaxyManager(Galaxy * g, Universe * u);
+		populationAnalysis* getPopulationAnalysis();
 		void addEvent(Event e);
 		void handleEvent(Event e);
 		void battle(int pID);
