@@ -8,6 +8,7 @@
 #include <queue>
 #include <iomanip>
 #include <vector>
+#include "../structs.h"
      
 class UniverseManager{
 	private:

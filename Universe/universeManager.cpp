@@ -48,6 +48,9 @@ void UniverseManager::Render(){
 	
 	for(int i = 0; i < universe->getLength(); i++){
 		for(int j = 0; j < universe->getWidth(); j++){
+			Galaxy * g = universe->getGalaxy(i, j);
+			galaxyPopulationCounts gpc = g->getPopulationCounts();
+			printf("(%d, %d, %d)\n", gpc.flood, gpc.civilian, gpc.military );
 			SDL_Rect galaxyIcon;
 			galaxyIcon.x = (i * 50) + 50;
 			galaxyIcon.y = (j * 50) + 50;

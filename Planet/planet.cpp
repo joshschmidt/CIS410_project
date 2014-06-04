@@ -17,13 +17,16 @@ Planet::Planet(int seed, int id, int galaxyId) {
 
 	if(rand()%10 == 0) {
 		f = (rand()%(P_SIZE));
+		c = 0;
+		m = 0;
 	}
 
 	else {
+		f = 0;
 		c = (rand()%(P_SIZE));
 		m = (rand()%(P_SIZE/10));	
 	}
-
+	printf("(%d, %d, %d)\n", f, c, m );
 	population = new Population(f,c,m);
 	_id = id;
 	_galaxyId = galaxyId;
