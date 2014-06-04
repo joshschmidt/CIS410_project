@@ -1,9 +1,9 @@
 #include "universeManager.h"    
-#include <stdio.h>      
+#include <stdio.h>  
 #include <stdlib.h>     
 #include <time.h> 
-
 #include "../../sdl/include/SDL2/SDL.h"
+
 //The window we'll be rendering to
 SDL_Window* window = NULL;
 
@@ -13,16 +13,26 @@ SDL_Renderer* renderer = NULL;
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+     
+     
 UniverseManager::UniverseManager(Universe * u) {
 	universe = u;
-	Init();
-}
-
+        int length = universe->getLength();
+        int width = universe->getWidth();
+        for(int i = 0; i < length; i++) {
+        	for(int j = 0; j < width; j++) {
+	                managers.push_back(GalaxyManager(u->getGalaxy(i,j), universe));                
+            	}
+     
+    	}
+        Init();
+    }
+     
 void UniverseManager::advanceSim() {
-
-//here is where the thread delegation goes to the individual galaxy managers
-
-
+     
+    //here is where the thread delegation goes to the individual galaxy managers
+ 
+     
 }
 
 void UniverseManager::Render(){

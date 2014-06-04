@@ -3,12 +3,10 @@
 #include "../Event/event.h"
 #include "../Galaxy/galaxy.h"
 #include "../Population/population.h"
-#include "../Universe/universe.h"
 #include <iostream>
 #include <queue>
 #include <iomanip>
 #include <vector>
-
 
 
 class CompareEvent {

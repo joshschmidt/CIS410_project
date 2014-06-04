@@ -5,9 +5,8 @@
 
 
 
-GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
+GalaxyManager::GalaxyManager(Galaxy * g) {
 	galaxy = g;
-	universe = u;
 	sim_time = 0.0;
 	min_time_next_event = 1.0e+29;
 	next_event_type = -1;
