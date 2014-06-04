@@ -11,14 +11,16 @@
      
 class UniverseManager{
 	private:
-        	Universe * universe;
+		Universe * universe;
                 //list of galaxy managers
                 std::vector<GalaxyManager> managers;
-                 
-     
-        public:
-        	UniverseManager(Universe * u);
-                void advanceSim();                   
+	     
+	public:
+		UniverseManager(Universe * u);
+		void advanceSim();
+		void Init();
+		void Render();
+                      
      
 };
 #endif

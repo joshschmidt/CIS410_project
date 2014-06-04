@@ -2,11 +2,9 @@
 #define UNIVERSE_H
 #include "../Galaxy/galaxy.h"
 
-  
 
 class Universe
 {
-
 	private:
 		int _id;
 		int _length;
