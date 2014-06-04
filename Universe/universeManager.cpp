@@ -10,8 +10,8 @@ SDL_Window* window = NULL;
 //The window renderer
 SDL_Renderer* renderer = NULL;
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
      
      
@@ -45,15 +45,15 @@ void UniverseManager::Render(){
 	screen.h = SCREEN_HEIGHT;
 	
 	SDL_RenderFillRect(renderer, &screen);
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255 );
-	for(int i = 0; i < 10; i++){
-		for(int j = 0; j < 10; j++){
+	
+	for(int i = 0; i < universe->getLength(); i++){
+		for(int j = 0; j < universe->getWidth(); j++){
 			SDL_Rect galaxyIcon;
 			galaxyIcon.x = (i * 50) + 50;
 			galaxyIcon.y = (j * 50) + 50;
 			galaxyIcon.w = 10;
 			galaxyIcon.h = 10;
-			
+			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			SDL_RenderFillRect(renderer, &galaxyIcon);
 		}
 	}

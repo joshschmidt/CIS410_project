@@ -9,7 +9,7 @@
 
 
 int main() {
-	Universe universe = Universe(1, 1, 1000, 1000);
+	Universe universe = Universe(1, 1, 100, 100);
 	UniverseManager * universeManager = new UniverseManager(&universe);
 
 	
