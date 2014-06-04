@@ -18,6 +18,8 @@ class UniverseManager
 	public:
 		UniverseManager(Universe * u);
 		void advanceSim();
+		void Init();
+		void Render();
 
 		
 
