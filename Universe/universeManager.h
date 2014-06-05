@@ -8,6 +8,7 @@
 #include <queue>
 #include <iomanip>
 #include <vector>
+#include <cilk/cilk.h>
 #include "../structs.h"
      
 class UniverseManager{
@@ -18,7 +19,7 @@ class UniverseManager{
 	     
 	public:
 		UniverseManager(Universe * u);
-		void advanceSim();
+		void runSim();
 		void Init();
 		void Render();
                       

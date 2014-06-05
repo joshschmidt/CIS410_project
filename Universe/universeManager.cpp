@@ -28,10 +28,13 @@ UniverseManager::UniverseManager(Universe * u) {
         Init();
     }
      
-void UniverseManager::advanceSim() {
-     
+void UniverseManager::runSim() {
+	for(GalaxyManager gm : managers) {
+		cilk_spawn(gm.advanceSim(100));
+	}
+	
     //here is where the thread delegation goes to the individual galaxy managers
- 
+	 
      
 }
 
