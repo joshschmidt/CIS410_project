@@ -38,6 +38,21 @@ void GalaxyManager::handleEvent(Event e) {
 
 }
 
+void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
+	//get the galaxy
+	Galaxy * g = universe->getGalaxy(gID);
+
+	//get the planet with the gicen galaxy
+	Planet * p = g->getPlanet(pID);
+
+	//set the planet's population to be the sum of it's current population and the new population
+	p->setMilitary(p->getMilitary()+newPop->getMilitary());
+	p->setFlood(p->getFlood()+newPop->getFlood());
+	p->setCiv(p->getCiv()+newPop->getCiv());
+
+	//addEvent(pop->getBehavior());
+}
+
 void GalaxyManager::battle(int pID) {
 	Planet * p = galaxy->getPlanet(pID);
  
