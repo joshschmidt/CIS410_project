@@ -4,7 +4,7 @@
 #include <stdio.h>      
 #include <stdlib.h> 
 #include <iostream>
-#include "../sdl/include/SDL2/SDL.h"
+//#include "../sdl/include/SDL2/SDL.h"
 
 
 

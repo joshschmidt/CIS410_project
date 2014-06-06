@@ -31,7 +31,7 @@ simtest: test.o universe.o planet.o galaxy.o population.o event.o galaxyManager.
 	icpc -g -std=c++11 galaxy.o universe.o planet.o population.o galaxyManager.o universeManager.o event.o test.o -o simtest
 
 sim:    main.o universe.o planet.o galaxy.o population.o event.o galaxyManager.o universeManager.o
-	icpc -g -std=c++11 galaxy.o universe.o planet.o population.o galaxyManager.o universeManager.o event.o main.o -o sim -L/home/users/mknowle2/sdl/lib -lSDL2
+	icpc -g -std=c++11 galaxy.o universe.o planet.o population.o galaxyManager.o universeManager.o event.o main.o -o sim 
 
 clean:
 	rm simtest sim *.o
