@@ -30,27 +30,26 @@ void GalaxyManager::handleEvent(Event e) {
 		case 0:
 			battle(e.getpID());
 			break;
-			
-
-
-
+		case 1:
+			moveInterplanet(e.getPopulation(), e.getgID(), e.getpID());
+			break;
 	}
 
 }
 
 void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
 	//get the galaxy
-	Galaxy * g = universe->getGalaxy(gID);
+	Galaxy g = universe->getGalaxy(gID);
 
 	//get the planet with the gicen galaxy
-	Planet * p = g->getPlanet(pID);
+	Planet * p = g.getPlanet(pID);
 
 	//set the planet's population to be the sum of it's current population and the new population
-	p->setMilitary(p->getMilitary()+newPop->getMilitary());
-	p->setFlood(p->getFlood()+newPop->getFlood());
-	p->setCiv(p->getCiv()+newPop->getCiv());
+	p->getPopulation()->setMilitary(p->getPopulation()->getMilitary()+newPop->getMilitary());
+	p->getPopulation()->setFlood(p->getPopulation()->getFlood()+newPop->getFlood());
+	p->getPopulation()->setCiv(p->getPopulation()->getCiv()+newPop->getCiv());
 
-	//addEvent(pop->getBehavior());
+	//addEvent(p->getPopulation()->getBehavior());
 }
 
 void GalaxyManager::battle(int pID) {
@@ -109,13 +108,7 @@ void GalaxyManager::battle(int pID) {
 	pop->setCiv(civ);
 
 	//addEvent(pop->getBehavior());
-	
-
-
 }
-
-
-
 
 void GalaxyManager::timing() {
 

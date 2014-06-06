@@ -142,6 +142,8 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 				pID = maxMilPlanet;
 			}
 			// TODO: schedule move/attack event with newPop, gID, pID
+			Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
+			events.push_back(newEvent);
 		} else { // Human Population: Evacuate and Attack
 			
 			// Evacuating Civilians
@@ -157,6 +159,8 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 				gID = destX*1000 + destY;
 				pID = 0;
 				// TODO: Schedule move/attack event with newPop, gID, pID
+				Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
+				events.push_back(newEvent);
 			}// Otherwise dont evacuate
 
 			// Attacking Largest Flood population
@@ -174,6 +178,8 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 			}
 			pID = maxFloodPlanet;
 			// TODO: Schedule move/attack event with newPop, gID, pID
+			Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
+			events.push_back(newEvent);			
 
 		}
 
