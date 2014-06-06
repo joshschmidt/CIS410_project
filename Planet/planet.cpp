@@ -26,7 +26,7 @@ Planet::Planet(int seed, int id, int galaxyId) {
 		c = (rand()%(P_SIZE));
 		m = (rand()%(P_SIZE/10));	
 	}
-	printf("(%d, %d, %d)\n", f, c, m );
+	//printf("(%d, %d, %d)\n", f, c, m );
 	population = new Population(f,c,m);
 	_id = id;
 	_galaxyId = galaxyId;

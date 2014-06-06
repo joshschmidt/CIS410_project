@@ -43,7 +43,7 @@ class GalaxyManager
 		// Uses a Q-Learning based technique to determine population movements
 		void getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
 		populationAnalysis* getPopulationAnalysis();
-		void addEvents(std::vector<Event*> eventList);
+		void addEvents(std::vector<Event> eventList);
 		void handleEvent(Event e);
 		void battle(int pID);
 		//takes a population object, galaxy ID and planet ID and then adds the population from newPop

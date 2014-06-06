@@ -35,19 +35,7 @@ UniverseManager::UniverseManager(Universe * u) {
     }
      
 void UniverseManager::runSim() {
-	
-	int runLength = 10;
-	int simTime = 0;
 
-	while(simTime < 10) {
-
-		for(int i = 0; i < managers.size(); i++) {
-			managers.at(i).advanceSim(100);	
-		}
-
-		simTime++;
-
-	}
      
 }
 

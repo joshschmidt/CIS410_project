@@ -31,7 +31,7 @@ class Population
 		void getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopulationCounts* summary, int* x, int*y);
 		populationAnalysis* getPopulationAnalysis(Universe* universe);
 
-		std::vector<Event*> getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
+		std::vector<Event*> getBehavior(Universe* universe, Galaxy* galaxy);
 
 };
 #endif

@@ -22,7 +22,7 @@ class Event
 		int getgID(){return _galaxyID;};
 		int getType(){return _type;};
 		float getTime(){return _time;};
-		void setTime(float t){_time = t;};
+		float setTime(float t){_time = t;};
 		Population* getPopulation() {return _population;};
 
 
