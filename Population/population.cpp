@@ -97,8 +97,8 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 {
 	vector<Event*> events;
 
-	// Event type, PlanetID GalaxyI
-	int type, pID, gID = 0;
+	// Event type set to move/1, PlanetID, GalaxyID
+	int type = 1, pID, gID = 0;
 	float time;
 
 	int x = galaxy->getGalaxyID()/1000;
@@ -141,7 +141,7 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 				}
 				pID = maxMilPlanet;
 			}
-			// TODO: schedule move/attack event with newPop, gID, pID
+			//schedule move/attack event with newPop, gID, pID
 			Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
 			events.push_back(newEvent);
 		} else { // Human Population: Evacuate and Attack
@@ -158,7 +158,7 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 				civilian *= 0.25;
 				gID = destX*1000 + destY;
 				pID = 0;
-				// TODO: Schedule move/attack event with newPop, gID, pID
+				// TODO: why 0 for pID? Schedule move/attack event with newPop, gID, pID
 				Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
 				events.push_back(newEvent);
 			}// Otherwise dont evacuate
@@ -177,7 +177,7 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Plane
 				}
 			}
 			pID = maxFloodPlanet;
-			// TODO: Schedule move/attack event with newPop, gID, pID
+			//Schedule move/attack event with newPop, gID, pID
 			Event* newEvent = new Event(type, 0.0, pID, gID, newPop);
 			events.push_back(newEvent);			
 

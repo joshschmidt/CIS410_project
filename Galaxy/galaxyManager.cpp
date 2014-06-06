@@ -49,7 +49,8 @@ void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
 	p->getPopulation()->setFlood(p->getPopulation()->getFlood()+newPop->getFlood());
 	p->getPopulation()->setCiv(p->getPopulation()->getCiv()+newPop->getCiv());
 
-	//addEvent(p->getPopulation()->getBehavior());
+	//generate the next event(s)
+	addEvent(p->getPopulation()->getBehavior());
 }
 
 void GalaxyManager::battle(int pID) {
@@ -107,24 +108,33 @@ void GalaxyManager::battle(int pID) {
 	pop->setFlood(flood);
 	pop->setCiv(civ);
 
-	//addEvent(pop->getBehavior());
+	//generate the next event(s)
+	addEvent(pop->getBehavior());
 }
 
 void GalaxyManager::timing() {
-
+	//retrive the next event from the queue
 	Event nextEvent = pq.top();
+	//fetch the "duration" of the next event
 	min_time_next_event = nextEvent.getTime();
+	//fetch the type of event
 	next_event_type = nextEvent.getType();
-	sim_time = min_time_next_event;
+	//advance the sim clock
+	sim_time += min_time_next_event;
+	//process the event, the next event will be generated at the end
 	handleEvent(nextEvent);
+	//remove the processed event from the queue
 	pq.pop();
+	//deallocate memory used by event.
+	//delete &nextEvent;
 
 }
 
 void GalaxyManager::advanceSim(int time) {
-
+	//keep running the simulation as long as there's time left
 	while(sim_time < time) {
 
+		//invoke the timing manager
 		timing();		
 	
 
