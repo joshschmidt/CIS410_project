@@ -33,7 +33,10 @@ double Galaxy::getDistance(int id1, int id2) {
 
 
 void Galaxy::printGalaxy() {
-	printf("(Galaxy Id: %d)", _id);
+	for(int i = 0; i < _planetCount; i++) {
+		_planets[i]->printPlanet();
+
+	}
 }
 
 //return a struct that contains the population counts off all the planets in the galaxy

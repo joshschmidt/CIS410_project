@@ -19,6 +19,7 @@ class UniverseManager{
 	     
 	public:
 		UniverseManager(Universe * u);
+		void printUniverse();
 		void runSim();
 		void Init();
 		void Render();

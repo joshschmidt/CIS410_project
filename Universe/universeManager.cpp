@@ -33,6 +33,10 @@ void UniverseManager::runSim() {
      
 }
 
+void UniverseManager::printUniverse() {
+	universe->printUniverse();
+}
+
 //void UniverseManager::Render(){
 //	SDL_RenderClear(renderer);
 //	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255 );

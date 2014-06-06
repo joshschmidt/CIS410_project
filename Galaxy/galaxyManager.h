@@ -38,7 +38,7 @@ class GalaxyManager
 	public:
 		GalaxyManager(Galaxy * g, Universe * u);
 		populationAnalysis* getPopulationAnalysis();
-		void addEvent(Event e);
+		void addEvents(std::vector<Event> eventList);
 		void handleEvent(Event e);
 		void battle(int pID);
 		void moveInterplanet();

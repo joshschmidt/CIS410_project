@@ -68,8 +68,10 @@ populationAnalysis* GalaxyManager::getPopulationAnalysis() {
 	return pop;
 }
 
-void GalaxyManager::addEvent(Event e) {
-	pq.push(e);
+void GalaxyManager::addEvents(std::vector<Event> eventList) {
+	for(Event event : eventList) {
+		pq.push(event);
+	}
 }
 
 
@@ -142,6 +144,11 @@ void GalaxyManager::battle(int pID) {
 	pop->setMilitary(mil);
 	pop->setFlood(flood);
 	pop->setCiv(civ);
+
+	//addEvent(pop->getBehavior());
+	
+
+
 }
 
 

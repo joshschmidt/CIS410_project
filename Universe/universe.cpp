@@ -29,5 +29,14 @@ Galaxy Universe::getGalaxy(int galaxyId) {
 
 //alternate universes!?
 void Universe::printUniverse() {
-	printf("Number of Universes: 1");
+	for(int i = 0; i < _length; i++) {
+		for(int j = 0; j < _width; j++) {
+			_galaxies[i][j]->printGalaxy();
+		}
+
+
+
+
+
+	}
 }
