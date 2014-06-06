@@ -20,6 +20,11 @@ Planet * Galaxy::getPlanet(int planetId){
 	return _planets[planetId];
 }
 
+void debug()
+{
+
+
+}
 double Galaxy::getDistance(int id1, int id2) {
 	Planet * p1 = _planets[id1];
 	Planet * p2 = _planets[id2];
@@ -40,12 +45,18 @@ void Galaxy::printGalaxy() {
 galaxyPopulationCounts Galaxy::getPopulationCounts(){
 	//declare the struct
 	galaxyPopulationCounts currentPopulation;
-
+	currentPopulation.flood = 0;
+	currentPopulation.civilian = 0;
+	currentPopulation.military = 0;
 	//itterate through each planet and sum up the populations, storing in the struct currentPopulation
-	cilk_for(int i = 0; i < _planetCount; i++){
+	for(int i = 0; i < _planetCount; i++){
 		currentPopulation.flood += _planets[i]->getFloodPopulation();
 		currentPopulation.civilian += _planets[i]->getCivilianPopulation();
 		currentPopulation.military += _planets[i]->getMilitaryPopulation();
+	}
+	if(currentPopulation.flood < 0 || currentPopulation.flood > 1000)
+	{
+		debug();
 	}
 	//return the struct
 	return currentPopulation;

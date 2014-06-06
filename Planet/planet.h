@@ -29,11 +29,12 @@ class Planet
 		int getX();
 		int getY();
 		int getZ();
-		void printPlanet();
+		
 		Population * getPopulation();
 		int getFloodPopulation();
 		int getCivilianPopulation();
 		int getMilitaryPopulation();
+		void printPlanet();
 		//get population attributes
 
 };

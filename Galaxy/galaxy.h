@@ -8,7 +8,6 @@ class Galaxy
 {
 	private:
 		int _id;
-		int _planetCount;
 		Planet ** _planets; 
 	     
 
@@ -18,6 +17,8 @@ class Galaxy
 		void printGalaxy();
 		double getDistance(int id1, int id2);
 		galaxyPopulationCounts getPopulationCounts();
+		
+		int _planetCount;
 
 };
 

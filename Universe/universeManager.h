@@ -20,7 +20,7 @@ class UniverseManager{
 	public:
 		UniverseManager(Universe * u);
 		void runSim();
-		void Init();
+		void InitSDL();
 		void Render();
                       
      
