@@ -6,6 +6,7 @@
 #include "../Planet/planet.h"
 #include "../Universe/universe.h"
 #include "../structs.h"
+#include <vector>
 
 class Planet;
 class Galaxy;
@@ -28,7 +29,8 @@ class Population
 
 		void getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopulationCounts* summary, int* x, int*y);
 		populationAnalysis* getPopulationAnalysis(Universe* universe);
-		void getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
+
+		std::vector<Event*> getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
 
 };
 #endif

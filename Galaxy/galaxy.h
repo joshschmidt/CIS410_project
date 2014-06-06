@@ -17,7 +17,10 @@ class Galaxy
 	     
 
 	public:
+
 		Galaxy(int seed, int id, int planetCount);
+		int getGalaxyID() {return _id;};
+		int getPlanetCount() {return _planetCount;};
 		Planet * getPlanet(int planetId);
 		void printGalaxy();
 		double getDistance(int id1, int id2);

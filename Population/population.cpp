@@ -91,23 +91,24 @@ populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 }
 
 
-
+using std::vector;
 // Uses a Q-Learning based technique to determine population movements
-void Population::getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet)
+vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet)
 {
-	
-	/*
+	vector<Event*> events;
+
+	// Event type, PlanetID GalaxyI
 	int type, pID, gID = 0;
 	float time;
 
-	int x = galaxy->getGalaxyId()/1000;
-	int y = galaxy->getGalaxyId()%1000;
+	int x = galaxy->getGalaxyID()/1000;
+	int y = galaxy->getGalaxyID()%1000;
 
 	// Determine if this is a contested galaxy
 	galaxyPopulationCounts summary = galaxy->getPopulationCounts();
 	if(summary.flood != 0 && (summary.military != 0 || summary.civilian != 0))
 	{	// Contested Galaxy
-		gID = galaxy->getGalaxyId();
+		gID = galaxy->getGalaxyID();
 
 		if(flood != 0) { // Flood population: Attack.
 			Population* newPop = new Population(0.75 * flood, 0, 0);
@@ -144,7 +145,7 @@ void Population::getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet)
 		} else { // Human Population: Evacuate and Attack
 			
 			// Evacuating Civilians
-			populationAnalysis* pop = universe->getPopulationAnalysis();
+			populationAnalysis* pop = getPopulationAnalysis(universe);
 			// Getting best adjacent galaxy to send civilians to
 			int destX = x;
 			int destY = y;
@@ -178,12 +179,13 @@ void Population::getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet)
 
 	} else {
 		// Uncontested Galaxy
-		populationAnalysis* pop = universe->getPopulationAnalysis();
+		populationAnalysis* pop = getPopulationAnalysis(universe);
 		if(flood != 0) { // Flood population: Attack.
 
 		} else { // Human Population: Reinforce
 
 		}
 	}
-	*/
+	return events;
+	
 }
