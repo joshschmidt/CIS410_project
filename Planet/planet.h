@@ -3,7 +3,9 @@
 
 #include "../Population/population.h"
 
-
+class Population;
+class Galaxy;
+class Universe;
 
 class Planet
 {

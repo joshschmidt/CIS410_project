@@ -13,79 +13,62 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 	sim_time = 0.0;
 	min_time_next_event = 1.0e+29;
 	next_event_type = -1;
+	pq = new std::priority_queue<Event*, std::vector<Event*>, CompareEvent>();
+	
 }
 
-populationAnalysis* GalaxyManager::getPopulationAnalysis() {
-	// Find initial values
-	populationAnalysis* pop = new populationAnalysis;
-	cilk_for(int i = 0; i < 1000; i ++) {
-		for(int j = 0; j < 1000; j ++) {
-			galaxyPopulationCounts gal = universe->
-				getGalaxy(i,j)->getPopulationCounts();
-			pop->flood[i][j] = gal.flood;
-			pop->civilian[i][j] = gal.civilian;
-		}
+void GalaxyManager::init() {
+	
+	for(int i = 0; i < galaxy->getPlanetCount(); i++) {
+		addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
 	}
-	// Propogating Outward
-	// do 1000 times
-	for(int i = 0; i < 1000; i ++) {
-		// For each x,y
-		cilk_for(int x = 0; x < 1000; x ++) {
-			for(int y = 0; y < 1000; y ++) {
-				// Find the greatest value neighbor cell for each attribute
-				int maxFlood = 0;
-				int maxCiv = 0;
-				int mods[3] = {-1, 0, 1};
-				for(int a = 0; a < 3; a ++) {
-					for(int b = 0; b < 3; b ++) {
-						int newX = x + mods[a];
-						int newY = y + mods[b];
-						// Filter out border conditions and center cell
-						if (newX < 0 && newY < 0 && newX < 1000 && newY < 1000 &&
-						   (x != newX || y != newY)
-						) {
-							if(pop->flood[newX][newY] > maxFlood) {
-								maxFlood = pop->flood[newX][newY];
-							}
-							if(pop->civilian[newX][newY] > maxCiv) {
-								maxCiv = pop->civilian[newX][newY];
-							}
-						}
-					}
-				}
+}
 
-				// Apply propogation coefficient
-				maxFlood *= 0.75;
-				maxCiv *= 0.75;
 
-				// If the neighbor value is greater than the current value
-				// Replace it
-				if(maxFlood > pop->flood[x][y]) pop->flood[x][y] = maxFlood;
-				if(maxCiv > pop->civilian[x][y]) pop->civilian[x][y] = maxCiv;
-			}
-		}
+void GalaxyManager::addEvents(std::vector<Event*> eventList) {
+	for(Event * event : eventList) {
+		event->setTime(sim_time + (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 10));
+		event->printEvent();
+		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq->size() << "\n";
+		pq->push(event);
+		std::cout << pq << "\n"; 
+
 	}
-	return pop;
-}
-
-void GalaxyManager::addEvent(Event e) {
-	pq.push(e);
 }
 
 
-void GalaxyManager::handleEvent(Event e) {
+void GalaxyManager::handleEvent(Event * e) {
 
-	switch(e.getType()) {
+	switch(e->getType()) {
 
 		case 0:
-			battle(e.getpID());
+			battle(e->getpID());
+			printf("battle happening \n");
+			e->printEvent();
 			break;
-			
-
-
-
+		case 1:
+			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
+			printf("move happening \n");
+			e->printEvent();
+			break;
 	}
 
+}
+
+void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
+	//get the galaxy
+	Galaxy g = universe->getGalaxy(gID);
+
+	//get the planet with the gicen galaxy
+	Planet * p = g.getPlanet(pID);
+
+	//set the planet's population to be the sum of it's current population and the new population
+	p->getPopulation()->setMilitary(p->getPopulation()->getMilitary()+newPop->getMilitary());
+	p->getPopulation()->setFlood(p->getPopulation()->getFlood()+newPop->getFlood());
+	p->getPopulation()->setCiv(p->getPopulation()->getCiv()+newPop->getCiv());
+
+	//generate the next event(s)
+	addEvents(p->getPopulation()->getBehavior(universe, galaxy));
 }
 
 void GalaxyManager::battle(int pID) {
@@ -142,26 +125,37 @@ void GalaxyManager::battle(int pID) {
 	pop->setMilitary(mil);
 	pop->setFlood(flood);
 	pop->setCiv(civ);
+
+	//generate the next event(s)
+	addEvents(pop->getBehavior(universe, galaxy));
 }
 
-
-
-
 void GalaxyManager::timing() {
-
-	Event nextEvent = pq.top();
-	min_time_next_event = nextEvent.getTime();
-	next_event_type = nextEvent.getType();
+	//retrive the next event from the queue
+	std::cout << "2Queue size after initiliazation: " << pq->size() << "\n";
+	std::cout << pq << "\n"; 
+	Event * nextEvent = pq->top();
+	//fetch the "duration" of the next event
+	min_time_next_event = nextEvent->getTime();
+	//fetch the type of event
+	next_event_type = nextEvent->getType();
+	//advance the sim clock
 	sim_time = min_time_next_event;
+	//process the event, the next event will be generated at the end
 	handleEvent(nextEvent);
-	pq.pop();
+	//remove the processed event from the queue
+	pq->pop();
+	//deallocate memory used by event.
+	//delete &nextEvent;
 
 }
 
 void GalaxyManager::advanceSim(int time) {
-
+	
+	//keep running the simulation as long as there's time left
 	while(sim_time < time) {
-
+		std::cout << "1Queue size after initiliazation: " << pq->size() << "\n";
+		//invoke the timing manager
 		timing();		
 	
 

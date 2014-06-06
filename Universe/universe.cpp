@@ -8,12 +8,11 @@ Universe::Universe(int seed, int id, int length, int width) {
 	_id = id;
 	_length = length;
 	_width = width;
-
 	_galaxies = new Galaxy**[length];
 	for (int i = 0; i < length; ++i) {
   		_galaxies[i] = new Galaxy*[width];
 	}
-
+	
 	for(int x = 0; x < length; x++) {
 		for(int z = 0; z < width; z++) {
 			_galaxies[x][z] = new Galaxy(seed, (x * length) + z, 5);
@@ -29,5 +28,14 @@ Galaxy Universe::getGalaxy(int galaxyId) {
 
 //alternate universes!?
 void Universe::printUniverse() {
-	printf("Number of Universes: 1");
+	for(int i = 0; i < _length; i++) {
+		for(int j = 0; j < _width; j++) {
+			_galaxies[i][j]->printGalaxy();
+		}
+
+
+
+
+
+	}
 }

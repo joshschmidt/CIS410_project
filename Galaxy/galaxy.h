@@ -3,6 +3,10 @@
 #include "../Planet/planet.h"
 #include "../structs.h"
 
+class Planet;
+class Population;
+class Universe;
+
 
 class Galaxy
 {
@@ -12,7 +16,10 @@ class Galaxy
 	     
 
 	public:
+
 		Galaxy(int seed, int id, int planetCount);
+		int getGalaxyID() {return _id;};
+		int getPlanetCount() {return _planetCount;};
 		Planet * getPlanet(int planetId);
 		void printGalaxy();
 		double getDistance(int id1, int id2);
