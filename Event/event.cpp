@@ -14,7 +14,7 @@ Event::Event(int type, float time, int pID, int gID, Population* population) {
 }
 
 void Event::printEvent() {
-	printf("Event: %d %f %d %d", _type, _time, _planetID, _galaxyID);
+	printf("Event: %d %f %d %d\n", _type, _time, _planetID, _galaxyID);
 }
 
 

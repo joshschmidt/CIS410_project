@@ -13,16 +13,22 @@ Population::Population(int setFlood, int setCivilian, int setMilitary)
 
 // Finds the best adjacent galaxy to evacuate civilians to. Writes the coordinates back to x and y
 void Population::getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopulationCounts* summary, int* x, int*y) {
+	printf("getCivilianEvacuationGalaxy\n");
 	int destX = *x;
 	int destY = *y;
 	int minFlood = summary->flood;
 	int mods[3] = {-1, 0, 1};
+
+	
+	int width = 10;
+	int length = 10;
+
 	for(int a = 0; a < 3; a ++) {
 		for(int b = 0; b < 3; b ++) {
 			int newX = *x + mods[a];
 			int newY = *y + mods[b];
 			// Filter out border conditions and center cell
-			if (newX < 0 && newY < 0 && newX < 1000 && newY < 1000 &&
+			if (newX < 0 && newY < 0 && newX < width && newY < length &&
 			   (*x != newX || *y != newY)
 			) {
 				if(pop->flood[newX][newY] < minFlood) {
@@ -38,10 +44,17 @@ void Population::getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopu
 }
 
 populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
+
+	printf("getPopulationAnalysis\n");
+
+	int width = universe->getWidth();
+	int length = universe->getLength();
+
+
 	// Find initial values
 	populationAnalysis* pop = new populationAnalysis;
-	cilk_for(int i = 0; i < 1000; i ++) {
-		for(int j = 0; j < 1000; j ++) {
+	cilk_for(int i = 0; i < width; i ++) {
+		for(int j = 0; j < length; j ++) {
 			galaxyPopulationCounts gal = universe->
 				getGalaxy(i,j)->getPopulationCounts();
 			pop->flood[i][j] = gal.flood;
@@ -52,8 +65,8 @@ populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 	// do 1000 times
 	for(int i = 0; i < 1000; i ++) {
 		// For each x,y
-		cilk_for(int x = 0; x < 1000; x ++) {
-			for(int y = 0; y < 1000; y ++) {
+		cilk_for(int x = 0; x < width; x ++) {
+			for(int y = 0; y < length; y ++) {
 				// Find the greatest value neighbor cell for each attribute
 				int maxFlood = 0;
 				int maxCiv = 0;
@@ -63,7 +76,8 @@ populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 						int newX = x + mods[a];
 						int newY = y + mods[b];
 						// Filter out border conditions and center cell
-						if (newX < 0 && newY < 0 && newX < 1000 && newY < 1000 &&
+						/*
+						if (newX < 0 && newY < 0 && newX < width && newY < length &&
 						   (x != newX || y != newY)
 						) {
 							if(pop->flood[newX][newY] > maxFlood) {
@@ -73,6 +87,7 @@ populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 								maxCiv = pop->civilian[newX][newY];
 							}
 						}
+						*/
 					}
 				}
 
@@ -95,14 +110,20 @@ using std::vector;
 // Uses a Q-Learning based technique to determine population movements
 vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 {
+	printf("getBehavior\n");
 	vector<Event*> events;
 
 	// Event type set to move/1, PlanetID, GalaxyID
 	int type = 1, pID, gID = 0;
 	float time;
 
-	int x = galaxy->getGalaxyID()/1000;
-	int y = galaxy->getGalaxyID()%1000;
+	int width = universe->getWidth();
+	int length = universe->getLength();
+
+	int x = galaxy->getGalaxyID()/width;
+	int y = galaxy->getGalaxyID()%length;
+
+
 
 	// Determine if this is a contested galaxy
 	galaxyPopulationCounts summary = galaxy->getPopulationCounts();
@@ -156,7 +177,7 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 			if(destX != x && destY != y) {
 				Population* newPop = new Population(0, civilian*0.75, 0);
 				civilian *= 0.25;
-				gID = destX*1000 + destY;
+				gID = destX*width + destY;
 				pID = 0;
 				// TODO: why 0 for pID? Schedule move/attack event with newPop, gID, pID
 				Event* newEvent = new Event(type, 0.0, pID, gID, newPop);

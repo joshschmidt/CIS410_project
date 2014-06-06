@@ -9,8 +9,11 @@
 
 
 int main() {
+
 	Universe universe = Universe(1, 1, 10, 10);
+	//universe.printUniverse();
 	UniverseManager universeManager = UniverseManager(&universe);
+	universeManager.runSim();
 
 	
 

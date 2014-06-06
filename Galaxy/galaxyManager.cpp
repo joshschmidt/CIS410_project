@@ -17,6 +17,7 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 }
 
 void GalaxyManager::init() {
+
 	for(int i = 0; i < galaxy->getPlanetCount(); i++) {
 		addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
 	}
@@ -26,6 +27,8 @@ void GalaxyManager::init() {
 void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 	for(Event * event : eventList) {
 		event->setTime(sim_time + (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 10));
+		event->printEvent();
+		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq.size() << "\n";
 		pq.push(*event);
 	}
 }
@@ -37,9 +40,13 @@ void GalaxyManager::handleEvent(Event e) {
 
 		case 0:
 			battle(e.getpID());
+			printf("battle happening \n");
+			e.printEvent();
 			break;
 		case 1:
 			moveInterplanet(e.getPopulation(), e.getgID(), e.getpID());
+			printf("move happening \n");
+			e.printEvent();
 			break;
 	}
 
@@ -122,6 +129,7 @@ void GalaxyManager::battle(int pID) {
 
 void GalaxyManager::timing() {
 	//retrive the next event from the queue
+	std::cout << "2Queue size after initiliazation: " << pq.size() << "\n";
 	Event nextEvent = pq.top();
 	//fetch the "duration" of the next event
 	min_time_next_event = nextEvent.getTime();
@@ -139,9 +147,10 @@ void GalaxyManager::timing() {
 }
 
 void GalaxyManager::advanceSim(int time) {
+	
 	//keep running the simulation as long as there's time left
 	while(sim_time < time) {
-
+		std::cout << "1Queue size after initiliazation: " << pq.size() << "\n";
 		//invoke the timing manager
 		timing();		
 	
