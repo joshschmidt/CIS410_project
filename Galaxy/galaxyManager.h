@@ -46,7 +46,9 @@ class GalaxyManager
 		void addEvent(Event e);
 		void handleEvent(Event e);
 		void battle(int pID);
-		void moveInterplanet();
+		//takes a population object, galaxy ID and planet ID and then adds the population from newPop
+		//onto the planet's pop.
+		void moveInterplanet(Population * newPop, int gID, int pID);
 		void moveIntergalactic();
 		void timing();
 		void advanceSim(int time);
