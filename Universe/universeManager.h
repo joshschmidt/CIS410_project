@@ -15,7 +15,7 @@ class UniverseManager{
 	private:
 		Universe * universe;
                 //list of galaxy managers
-                std::vector<GalaxyManager> managers;
+                std::vector<GalaxyManager*> * managers;
 	     
 	public:
 		UniverseManager(Universe * u);

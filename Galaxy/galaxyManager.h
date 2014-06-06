@@ -15,9 +15,9 @@
 
 class CompareEvent {
     public:
-    bool operator()(Event& e1, Event& e2) // Returns true if e1 is earlier than e2
+    bool operator()(Event * e1, Event * e2) // Returns true if e1 is earlier than e2
     {
-       if (e1.getTime() < e2.getTime()) return true;
+       if (e1->getTime() < e2->getTime()) return true;
        return false;
     }
 };
@@ -32,7 +32,7 @@ class GalaxyManager
 		int next_event_type;
 		
 		 
-		std::priority_queue<Event, std::vector<Event>, CompareEvent> pq;
+		std::priority_queue<Event*, std::vector<Event *>, CompareEvent> * pq;
 	     
 
 	public:
@@ -44,7 +44,7 @@ class GalaxyManager
 		void getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
 		populationAnalysis* getPopulationAnalysis();
 		void addEvents(std::vector<Event*> eventList);
-		void handleEvent(Event e);
+		void handleEvent(Event * e);
 		void battle(int pID);
 		//takes a population object, galaxy ID and planet ID and then adds the population from newPop
 		//onto the planet's pop.

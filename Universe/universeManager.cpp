@@ -19,18 +19,19 @@ UniverseManager::UniverseManager(Universe * u) {
 	universe = u;
         int length = universe->getLength();
         int width = universe->getWidth();
+	managers = new std::vector<GalaxyManager*>;
         for(int i = 0; i < length; i++) {
         	for(int j = 0; j < width; j++) {
-	                managers.push_back(GalaxyManager(u->getGalaxy(i,j), universe));                
+	                managers->push_back(new GalaxyManager(u->getGalaxy(i,j), universe));                
             	}
      
     	}
 	
-	//printf("%l galaxy managers", managers.size());
+	//printf("%l galaxy managers", managers->size());
 
-	cilk_for(int i = 0; i < managers.size(); i++) {
+	cilk_for(int i = 0; i < managers->size(); i++) {
 		//printf("%d", i);
-		managers.at(i).init();
+		managers->at(i)->init();
 
 	}
        // Init();
@@ -43,8 +44,8 @@ void UniverseManager::runSim() {
 
 	while(simTime < 10) {
 
-		for(int i = 0; i < managers.size(); i++) {
-			managers.at(i).advanceSim(100);	
+		for(int i = 0; i < managers->size(); i++) {
+			managers->at(i)->advanceSim(100);	
 		}
 
 		simTime++;

@@ -13,15 +13,15 @@ Population::Population(int setFlood, int setCivilian, int setMilitary)
 
 // Finds the best adjacent galaxy to evacuate civilians to. Writes the coordinates back to x and y
 void Population::getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopulationCounts* summary, int* x, int*y) {
-	printf("getCivilianEvacuationGalaxy\n");
+	//printf("getCivilianEvacuationGalaxy\n");
 	int destX = *x;
 	int destY = *y;
 	int minFlood = summary->flood;
 	int mods[3] = {-1, 0, 1};
 
 	
-	int width = 10;
-	int length = 10;
+	int width = 1;
+	int length = 1;
 
 	for(int a = 0; a < 3; a ++) {
 		for(int b = 0; b < 3; b ++) {
@@ -45,7 +45,7 @@ void Population::getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopu
 
 populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 
-	printf("getPopulationAnalysis\n");
+	//printf("getPopulationAnalysis\n");
 
 	int width = universe->getWidth();
 	int length = universe->getLength();
@@ -110,7 +110,7 @@ using std::vector;
 // Uses a Q-Learning based technique to determine population movements
 vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 {
-	printf("getBehavior\n");
+	//printf("getBehavior\n");
 	vector<Event*> events;
 
 	// Event type set to move/1, PlanetID, GalaxyID

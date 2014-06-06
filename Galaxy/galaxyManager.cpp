@@ -13,11 +13,12 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 	sim_time = 0.0;
 	min_time_next_event = 1.0e+29;
 	next_event_type = -1;
+	pq = new std::priority_queue<Event*, std::vector<Event*>, CompareEvent>();
 	
 }
 
 void GalaxyManager::init() {
-
+	
 	for(int i = 0; i < galaxy->getPlanetCount(); i++) {
 		addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
 	}
@@ -28,27 +29,27 @@ void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 	for(Event * event : eventList) {
 		event->setTime(sim_time + (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 10));
 		event->printEvent();
-		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq.size() << "\n";
-		pq.push(*event);
-		std::cout << &pq << "\n"; 
+		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq->size() << "\n";
+		pq->push(event);
+		std::cout << pq << "\n"; 
 
 	}
 }
 
 
-void GalaxyManager::handleEvent(Event e) {
+void GalaxyManager::handleEvent(Event * e) {
 
-	switch(e.getType()) {
+	switch(e->getType()) {
 
 		case 0:
-			battle(e.getpID());
+			battle(e->getpID());
 			printf("battle happening \n");
-			e.printEvent();
+			e->printEvent();
 			break;
 		case 1:
-			moveInterplanet(e.getPopulation(), e.getgID(), e.getpID());
+			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
 			printf("move happening \n");
-			e.printEvent();
+			e->printEvent();
 			break;
 	}
 
@@ -131,19 +132,19 @@ void GalaxyManager::battle(int pID) {
 
 void GalaxyManager::timing() {
 	//retrive the next event from the queue
-	std::cout << "2Queue size after initiliazation: " << pq.size() << "\n";
-	std::cout << &pq << "\n"; 
-	Event nextEvent = pq.top();
+	std::cout << "2Queue size after initiliazation: " << pq->size() << "\n";
+	std::cout << pq << "\n"; 
+	Event * nextEvent = pq->top();
 	//fetch the "duration" of the next event
-	min_time_next_event = nextEvent.getTime();
+	min_time_next_event = nextEvent->getTime();
 	//fetch the type of event
-	next_event_type = nextEvent.getType();
+	next_event_type = nextEvent->getType();
 	//advance the sim clock
 	sim_time = min_time_next_event;
 	//process the event, the next event will be generated at the end
 	handleEvent(nextEvent);
 	//remove the processed event from the queue
-	pq.pop();
+	pq->pop();
 	//deallocate memory used by event.
 	//delete &nextEvent;
 
@@ -153,7 +154,7 @@ void GalaxyManager::advanceSim(int time) {
 	
 	//keep running the simulation as long as there's time left
 	while(sim_time < time) {
-		std::cout << "1Queue size after initiliazation: " << pq.size() << "\n";
+		std::cout << "1Queue size after initiliazation: " << pq->size() << "\n";
 		//invoke the timing manager
 		timing();		
 	
