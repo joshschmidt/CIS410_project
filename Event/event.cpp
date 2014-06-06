@@ -5,11 +5,12 @@
 
 
 
-Event::Event(int type, float time, int pID, int gID) {
+Event::Event(int type, float time, int pID, int gID, Population* population) {
 	_type = type;
 	_time = time;
 	_planetID = pID;
 	_galaxyID = gID;
+	_population = population;
 }
 
 void Event::printEvent() {

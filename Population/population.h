@@ -11,6 +11,7 @@
 class Planet;
 class Galaxy;
 class Universe;
+class Event;
 
 
 class Population
