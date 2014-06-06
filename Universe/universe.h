@@ -2,6 +2,9 @@
 #define UNIVERSE_H
 #include "../Galaxy/galaxy.h"
 
+class Planet;
+class Galaxy;
+class Population;
 
 class Universe
 {

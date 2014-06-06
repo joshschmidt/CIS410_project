@@ -37,11 +37,18 @@ class GalaxyManager
 
 	public:
 		GalaxyManager(Galaxy * g, Universe * u);
+
+		// Finds the best adjacent galaxy to evacuate civilians to. Writes the coordinates back to x and y
+		void getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopulationCounts* summary, int* x, int*y);
+		// Uses a Q-Learning based technique to determine population movements
+		void getBehavior(Universe* universe, Galaxy* galaxy, Planet* planet);
 		populationAnalysis* getPopulationAnalysis();
 		void addEvents(std::vector<Event> eventList);
 		void handleEvent(Event e);
 		void battle(int pID);
-		void moveInterplanet();
+		//takes a population object, galaxy ID and planet ID and then adds the population from newPop
+		//onto the planet's pop.
+		void moveInterplanet(Population * newPop, int gID, int pID);
 		void moveIntergalactic();
 		void timing();
 		void advanceSim(int time);

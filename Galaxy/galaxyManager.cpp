@@ -15,58 +15,6 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 	next_event_type = -1;
 }
 
-populationAnalysis* GalaxyManager::getPopulationAnalysis() {
-	// Find initial values
-	populationAnalysis* pop = new populationAnalysis;
-	cilk_for(int i = 0; i < 1000; i ++) {
-		for(int j = 0; j < 1000; j ++) {
-			galaxyPopulationCounts gal = universe->
-				getGalaxy(i,j)->getPopulationCounts();
-			pop->flood[i][j] = gal.flood;
-			pop->civilian[i][j] = gal.civilian;
-		}
-	}
-	// Propogating Outward
-	// do 1000 times
-	for(int i = 0; i < 1000; i ++) {
-		// For each x,y
-		cilk_for(int x = 0; x < 1000; x ++) {
-			for(int y = 0; y < 1000; y ++) {
-				// Find the greatest value neighbor cell for each attribute
-				int maxFlood = 0;
-				int maxCiv = 0;
-				int mods[3] = {-1, 0, 1};
-				for(int a = 0; a < 3; a ++) {
-					for(int b = 0; b < 3; b ++) {
-						int newX = x + mods[a];
-						int newY = y + mods[b];
-						// Filter out border conditions and center cell
-						if (newX < 0 && newY < 0 && newX < 1000 && newY < 1000 &&
-						   (x != newX || y != newY)
-						) {
-							if(pop->flood[newX][newY] > maxFlood) {
-								maxFlood = pop->flood[newX][newY];
-							}
-							if(pop->civilian[newX][newY] > maxCiv) {
-								maxCiv = pop->civilian[newX][newY];
-							}
-						}
-					}
-				}
-
-				// Apply propogation coefficient
-				maxFlood *= 0.75;
-				maxCiv *= 0.75;
-
-				// If the neighbor value is greater than the current value
-				// Replace it
-				if(maxFlood > pop->flood[x][y]) pop->flood[x][y] = maxFlood;
-				if(maxCiv > pop->civilian[x][y]) pop->civilian[x][y] = maxCiv;
-			}
-		}
-	}
-	return pop;
-}
 
 void GalaxyManager::addEvents(std::vector<Event> eventList) {
 	for(Event event : eventList) {
