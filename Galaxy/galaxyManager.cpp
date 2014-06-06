@@ -30,6 +30,8 @@ void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 		event->printEvent();
 		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq.size() << "\n";
 		pq.push(*event);
+		std::cout << &pq << "\n"; 
+
 	}
 }
 
@@ -130,6 +132,7 @@ void GalaxyManager::battle(int pID) {
 void GalaxyManager::timing() {
 	//retrive the next event from the queue
 	std::cout << "2Queue size after initiliazation: " << pq.size() << "\n";
+	std::cout << &pq << "\n"; 
 	Event nextEvent = pq.top();
 	//fetch the "duration" of the next event
 	min_time_next_event = nextEvent.getTime();

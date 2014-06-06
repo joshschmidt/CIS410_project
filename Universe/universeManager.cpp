@@ -28,7 +28,7 @@ UniverseManager::UniverseManager(Universe * u) {
 	
 	//printf("%l galaxy managers", managers.size());
 
-	for(int i = 0; i < managers.size(); i++) {
+	cilk_for(int i = 0; i < managers.size(); i++) {
 		//printf("%d", i);
 		managers.at(i).init();
 
