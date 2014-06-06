@@ -46,7 +46,7 @@ class GalaxyManager
 		void addEvent(Event e);
 		void handleEvent(Event e);
 		void battle(int pID);
-		void moveInterplanet();
+		void moveInterplanet(Population * newPop, int gID, int pID);
 		void moveIntergalactic();
 		void timing();
 		void advanceSim(int time);
