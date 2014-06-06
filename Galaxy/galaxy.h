@@ -3,6 +3,10 @@
 #include "../Planet/planet.h"
 #include "../structs.h"
 
+class Planet;
+class Population;
+class Universe;
+
 
 class Galaxy
 {
