@@ -6,6 +6,14 @@
 #include <iostream>
 
 
+
+
 int main() {
-	Universe universe = Universe(1, 1, 1000, 10);
+
+	Universe universe = Universe(1, 1, 2, 2);
+	//universe.printUniverse();
+	UniverseManager universeManager = UniverseManager(&universe);
+	universeManager.runSim();
+					
+	return 0;
 }

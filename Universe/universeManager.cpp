@@ -2,8 +2,8 @@
 #include <stdio.h>  
 #include <stdlib.h>     
 #include <time.h> 
-#include "../../sdl/include/SDL2/SDL.h"
-#include "../../sdl/include/SDL2/SDL_ttf.h"
+//#include "../../sdl/include/SDL2/SDL.h"
+//#include "../../sdl/include/SDL2/SDL_ttf.h"
 #include <math.h> 
 #include <sstream>
 #include <string> 
@@ -28,10 +28,11 @@ UniverseManager::UniverseManager(Universe * u) {
 	cilk_for(int i = 0; i < managers->size(); i++) {
 		//printf("%d", i);
 		managers->at(i)->init();
+		//managers->at(i)->printGalaxy();
 
 	}
 	
-	InitSDL();
+	//InitSDL();
 }
      
 void UniverseManager::runSim() {
@@ -41,8 +42,9 @@ void UniverseManager::runSim() {
 
 	while(simTime < 10) {
 
-		for(int i = 0; i < managers->size(); i++) {
-			managers->at(i)->advanceSim(100);	
+		cilk_for(int i = 0; i < managers->size(); i++) {
+			managers->at(i)->advanceSim(100);
+			//managers->at(i)->printGalaxy();	
 		}
 
 		simTime++;
@@ -62,6 +64,7 @@ void UniverseManager::Render(){
 }
 
 
+/*
 void UniverseManager::InitSDL(){
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
@@ -183,7 +186,6 @@ void UniverseManager::InitSDL(){
 			}
 		}
 		SDL_RenderPresent(renderer);
-	}
-	
+	}	
 }
-
+*/

@@ -24,7 +24,7 @@ class Galaxy
 		void printGalaxy();
 		double getDistance(int id1, int id2);
 		galaxyPopulationCounts getPopulationCounts();
-		
+		int getID(){return _id;};	
 		int _planetCount;
 
 };

@@ -18,20 +18,31 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 }
 
 void GalaxyManager::init() {
+	std::vector<Event*> eq = std::vector<Event*>();
+	Population * p = new Population(100,100,100);
+	Event * e = new Event(1,1,1,1,p);
+	eq.push_back(e);
 	
-	for(int i = 0; i < galaxy->getPlanetCount(); i++) {
-		addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
-	}
+	//for(int i = 0; i < galaxy->getPlanetCount(); i++) {
+	//	addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
+	//}
+	
+	addEvents(eq);
+	
+}
+
+void GalaxyManager::printGalaxy() {
+	std::cout << "Galaxy: " << galaxy->getID() << " Queue Size: " << pq->size() << "\n";
 }
 
 
 void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 	for(Event * event : eventList) {
 		event->setTime(sim_time + (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 10));
-		event->printEvent();
-		std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq->size() << "\n";
+		//event->printEvent();
+		//std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq->size() << "\n";
 		pq->push(event);
-		std::cout << pq << "\n"; 
+		//std::cout << pq << "\n"; 
 
 	}
 }

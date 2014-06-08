@@ -53,6 +53,7 @@ class GalaxyManager
 		void timing();
 		void advanceSim(int time);
 		void init();
+		void printGalaxy();
 
 		
 
