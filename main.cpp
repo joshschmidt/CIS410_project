@@ -10,7 +10,7 @@
 
 int main() {
 
-	Universe universe = Universe(1, 1, 1, 1);
+	Universe universe = Universe(1, 1, LENGTH, WIDTH);
 	//universe.printUniverse();
 	UniverseManager universeManager = UniverseManager(&universe);
 	universeManager.runSim();
