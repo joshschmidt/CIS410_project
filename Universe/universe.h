@@ -1,6 +1,8 @@
 #ifndef UNIVERSE_H
 #define UNIVERSE_H
+
 #include "../Galaxy/galaxy.h"
+
 #define LENGTH 1
 #define WIDTH 1
 
@@ -19,7 +21,7 @@ class Universe
 	public:
 		Universe(int seed, int id, int length, int width);
 		Galaxy getGalaxy(int galaxyId);
-		Galaxy* getGalaxy(int w, int l){return _galaxies[w][l];};
+		Galaxy* getGalaxy(int x, int y){return _galaxies[x][y];};
 		void printUniverse();
 		void drawUniverse();
 		int getLength(){return _length;};

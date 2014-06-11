@@ -19,8 +19,8 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 
 void GalaxyManager::init() {
 	std::vector<Event*> eq = std::vector<Event*>();
-	Population * p = new Population(100,100,100);
-	Event * e = new Event(1,1,1,1,p);
+	//Population * p = new Population(100,100,100);
+	Event * e = new Event(1,1.0,0,0,NULL);
 	eq.push_back(e);
 	
 	//for(int i = 0; i < galaxy->getPlanetCount(); i++) {
@@ -53,13 +53,16 @@ void GalaxyManager::handleEvent(Event * e) {
 	switch(e->getType()) {
 
 		case 0:
+			// Forces arrive on a planet and a battle happens
+			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
 			battle(e->getpID());
 			printf("battle happening \n");
 			e->printEvent();
 			break;
 		case 1:
-			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
-			printf("move happening \n");
+			// Re-Evaluate behavior at this time
+			addEvents(galaxy->getPlanet(e->getpID())->getPopulation()->getBehavior(universe, galaxy));
+			printf("evaluation happening \n");
 			e->printEvent();
 			break;
 	}
@@ -142,6 +145,7 @@ void GalaxyManager::battle(int pID) {
 }
 
 void GalaxyManager::timing() {
+	if(pq->size() == 0) return;
 	//retrive the next event from the queue
 	std::cout << "2Queue size after initiliazation: " << pq->size() << "\n";
 	std::cout << pq << "\n"; 
