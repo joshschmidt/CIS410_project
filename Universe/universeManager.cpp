@@ -45,7 +45,7 @@ void UniverseManager::runSim() {
 	int runLength = 10;
 	int simTime = 0;
 
-	while(1) {
+	while(simTime < 10) {
 
 		cilk_for(int i = 0; i < managers->size(); i++) {
 			managers->at(i)->advanceSim(100);
@@ -148,7 +148,7 @@ void UniverseManager::runSim() {
 		}
 		//render to screen
 		SDL_RenderPresent(renderer);
-		
+		simTime++;
 	}
      
 }
