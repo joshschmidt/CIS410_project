@@ -3,8 +3,8 @@
 #include <stdio.h>  
 #include <stdlib.h>     
 #include <time.h> 
-#include "../../sdl/include/SDL2/SDL.h"
-#include "../../sdl/include/SDL2/SDL_ttf.h"
+#include "/home/users/mknowle2/sdl/include/SDL2/SDL.h"
+#include "/home/users/mknowle2/sdl/include/SDL2/SDL_ttf.h"
 #include <math.h> 
 #include <sstream>
 #include <string> 
@@ -45,14 +45,15 @@ void UniverseManager::runSim() {
 	int runLength = 10;
 	int simTime = 0;
 
-	while(simTime < 10) {
+	while(1) {
+		SDL_Delay(1000);
+		
 
-		cilk_for(int i = 0; i < managers->size(); i++) {
+		cilk_for(int i = 0; i < managers->size() - 1; i++) {
 			managers->at(i)->advanceSim(100);
 			//managers->at(i)->printGalaxy();	
 		}
 
-		simTime++;
 
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
@@ -86,8 +87,8 @@ void UniverseManager::runSim() {
 	    int barSize = 100; //100 pixels
 		
 
-		for(int i = 0; i < std::min(LENGTH, 10); i++){
-			for(int j = 0; j < std::min(WIDTH, 10); j++){
+		for(int i = 0; i <= std::min(LENGTH, 10); i++){
+			for(int j = 0; j <= std::min(WIDTH, 10); j++){
 				//get a galaxy
 				Galaxy * g = universe->getGalaxy(i, j);
 
@@ -125,7 +126,8 @@ void UniverseManager::runSim() {
 				floodBar.h = 25;
 				SDL_SetRenderDrawColor(renderer, 140, 204, 4, 255);
 				SDL_RenderFillRect(renderer, &floodBar);
-
+				if(floodPercent > .0)
+					printf("%f\n", floodPercent);
 				//draw civ
 	            SDL_Rect civilianBar;
 	            civilianBar.x = (i * 150) + 50 + floodBar.w;
@@ -148,7 +150,8 @@ void UniverseManager::runSim() {
 		}
 		//render to screen
 		SDL_RenderPresent(renderer);
-		simTime++;
+		printf("%s\n", "Rendered");
+
 	}
      
 }

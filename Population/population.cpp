@@ -18,7 +18,7 @@ void Population::executeOnBorders(int x, int y, std::function<void (int, int)> f
 			int newX = x + mods[a];
 			int newY = y + mods[b];
 			// Filter out border conditions and center cell
-			if (newX >= 0 && newY >= 0 && newX < LENGTH && newY < WIDTH &&
+			if (newX >= 0 && newY >= 0 && newX < LENGTH  && newY < WIDTH &&
 			   (x != newX || y != newY)
 			) {
 				func(newX,newY);
@@ -41,7 +41,7 @@ void Population::getCivilianEvacuationGalaxy(populationAnalysis* pop, galaxyPopu
 	});
 	*x = destX;
 	*y = destY;
-	std::cout << "CivilEvacGal" << destX << " " << destY << std::endl;
+	//std::cout << "CivilEvacGal" << destX << " " << destY << std::endl;
 }
 
 // Military chase the flood. Writes back the coordinates of the most infected adjacent galaxy.
@@ -58,7 +58,7 @@ void Population::getMilitaryAttackGalaxy(populationAnalysis* pop, galaxyPopulati
 	});
 	*x = destX;
 	*y = destY;
-	std::cout << "MilAttackGal" << destX << " " << destY << std::endl;
+	//std::cout << "MilAttackGal" << destX << " " << destY << std::endl;
 }
 
 // Flood chase civilians. Writes back the coordinates of the most civilian-populated adjacent galaxy.
@@ -75,7 +75,7 @@ void Population::getFloodAttackGalaxy(populationAnalysis* pop, galaxyPopulationC
 	});
 	*x = destX;
 	*y = destY;
-	std::cout << "FloodAttackGal" << destX << " " << destY << std::endl;
+	//std::cout << "FloodAttackGal" << destX << " " << destY << std::endl;
 }
 
 // Civilians spread themselves roughly evenly over the planets in a sector.
@@ -96,7 +96,7 @@ int Population::getCivilianEvacuationPlanet(Galaxy* galaxy) {
 
 // Military attack the most infected planet
 int Population::getMilitaryAttackPlanet(Galaxy* galaxy) {
-	int planetCount = galaxy->getPlanetCount();
+	int planetCount = 5;// galaxy->getPlanetCount();
 	int maxFloodPlanet = 0;
 	int maxFloodPop = 0;
 	for(int i = 0; i < planetCount; i ++) {
@@ -195,14 +195,14 @@ populationAnalysis* Population::getPopulationAnalysis(Universe* universe) {
 using std::vector;
 vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 {
-	std::cout << "GetBehavior" << flood << " " << civilian << " " << military << std::endl;
+	//std::cout << "GetBehavior" << flood << " " << civilian << " " << military << std::endl;
 	vector<Event*> events;
 
 	// Event type set to move/1, PlanetID, GalaxyID
 	int type = 0, pID, gID = 0;
 	float time;
 
-	int width = WIDTH;
+	int width = WIDTH; 
 	int length = LENGTH;
 
 	int x = galaxy->getGalaxyID()/width;

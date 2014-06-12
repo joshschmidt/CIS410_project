@@ -56,14 +56,14 @@ void GalaxyManager::handleEvent(Event * e) {
 			// Forces arrive on a planet and a battle happens
 			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
 			battle(e->getpID());
-			printf("battle happening \n");
-			e->printEvent();
+			//printf("battle happening \n");
+			//e->printEvent();
 			break;
 		case 1:
 			// Re-Evaluate behavior at this time
 			addEvents(galaxy->getPlanet(e->getpID())->getPopulation()->getBehavior(universe, galaxy));
-			printf("evaluation happening \n");
-			e->printEvent();
+			//printf("evaluation happening \n");
+			//e->printEvent();
 			break;
 	}
 

@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-	Universe universe = Universe(1, 1, 2, 2);
+	Universe universe = Universe(2, 1, 3, 3);
 	UniverseManager universeManager = UniverseManager(&universe);
 	universeManager.runSim();
 	return 0;
