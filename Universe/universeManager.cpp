@@ -47,7 +47,7 @@ void UniverseManager::runSim() {
 
 	while(1) {
 
-		for(int i = 0; i < managers->size(); i++) {
+		cilk_for(int i = 0; i < managers->size(); i++) {
 			managers->at(i)->advanceSim(100);
 			//managers->at(i)->printGalaxy();	
 		}
