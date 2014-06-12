@@ -147,8 +147,6 @@ void GalaxyManager::battle(int pID) {
 void GalaxyManager::timing() {
 	if(pq->size() == 0) return;
 	//retrive the next event from the queue
-	std::cout << "2Queue size after initiliazation: " << pq->size() << "\n";
-	std::cout << pq << "\n"; 
 	Event * nextEvent = pq->top();
 	//fetch the "duration" of the next event
 	min_time_next_event = nextEvent->getTime();
@@ -166,19 +164,9 @@ void GalaxyManager::timing() {
 }
 
 void GalaxyManager::advanceSim(int time) {
-	
 	//keep running the simulation as long as there's time left
 	while(sim_time < time) {
-		std::cout << "1Queue size after initiliazation: " << pq->size() << "\n";
 		//invoke the timing manager
 		timing();		
-	
-
 	}
-
-
-
-
-
-
 }
