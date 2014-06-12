@@ -58,19 +58,18 @@ void UniverseManager::runSim() {
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_QUIT){
-				exit(0);
+				
 				SDL_DestroyRenderer(renderer);
 			  	SDL_DestroyWindow(window);
 			  	SDL_Quit();
-
-				break;
+				exit(0);
             }
 			if (event.type == SDL_KEYDOWN){
-				exit(0);
+				
 				SDL_DestroyRenderer(renderer);
 			  	SDL_DestroyWindow(window);
 			  	SDL_Quit();
-				break;
+			  	exit(0);
             }
 		}
 
