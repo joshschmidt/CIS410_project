@@ -3,8 +3,8 @@
 
 #include "../Galaxy/galaxy.h"
 
-#define LENGTH 2
-#define WIDTH 2
+#define LENGTH 3
+#define WIDTH 3
 
 class Planet;
 class Galaxy;

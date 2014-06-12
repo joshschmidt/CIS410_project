@@ -96,7 +96,7 @@ int Population::getCivilianEvacuationPlanet(Galaxy* galaxy) {
 
 // Military attack the most infected planet
 int Population::getMilitaryAttackPlanet(Galaxy* galaxy) {
-	int planetCount = 5;// galaxy->getPlanetCount();
+	int planetCount = galaxy->getPlanetCount();
 	int maxFloodPlanet = 0;
 	int maxFloodPop = 0;
 	for(int i = 0; i < planetCount; i ++) {
@@ -204,9 +204,9 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 
 	int width = WIDTH; 
 	int length = LENGTH;
-
-	int x = galaxy->getGalaxyID()%width;
-	int y = galaxy->getGalaxyID()/length;
+	int galaxyID = galaxy->getGalaxyID();
+	int x = galaxy->getGalaxyID()/width;
+	int y = galaxy->getGalaxyID()%length;
 
 	// Determine if this is a contested galaxy
 	galaxyPopulationCounts summary = galaxy->getPopulationCounts();

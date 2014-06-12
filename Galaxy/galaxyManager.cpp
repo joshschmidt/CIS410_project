@@ -49,6 +49,7 @@ void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 
 
 void GalaxyManager::handleEvent(Event * e) {
+	printGalaxy();
 
 	switch(e->getType()) {
 
@@ -146,6 +147,7 @@ void GalaxyManager::battle(int pID) {
 
 void GalaxyManager::timing() {
 	if(pq->size() == 0) return;
+	printf("PQ SIZE %d\n", (int)pq->size());
 	//retrive the next event from the queue
 	Event * nextEvent = pq->top();
 	//fetch the "duration" of the next event
@@ -165,8 +167,11 @@ void GalaxyManager::timing() {
 
 void GalaxyManager::advanceSim(int time) {
 	//keep running the simulation as long as there's time left
+
 	while(sim_time < time) {
+		printf("SIM TIME %f", sim_time);
 		//invoke the timing manager
-		timing();		
+		timing();
+
 	}
 }

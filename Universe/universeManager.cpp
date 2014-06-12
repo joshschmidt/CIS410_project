@@ -41,20 +41,29 @@ UniverseManager::UniverseManager(Universe * u) {
 }
      
 void UniverseManager::runSim() {
-	
-	int runLength = 10;
-	int simTime = 0;
 
+	cilk_spawn Render();
 	while(1) {
-		SDL_Delay(1000);
+		//SDL_Delay(1000);
 		
 
-		cilk_for(int i = 0; i < managers->size() - 1; i++) {
-			managers->at(i)->advanceSim(100);
+		for(int i = 0; i < managers->size(); i++) {
+			printf("Before advanceSim: %d\n", i);
+			managers->at(i)->advanceSim(500);
 			//managers->at(i)->printGalaxy();	
 		}
 
+	}
+	cilk_sync;
+     
+}
 
+void UniverseManager::printUniverse() {
+	universe->printUniverse();
+}
+
+void UniverseManager::Render(){
+	while(1) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event))
 		{
@@ -64,14 +73,14 @@ void UniverseManager::runSim() {
 			  	SDL_DestroyWindow(window);
 			  	SDL_Quit();
 				exit(0);
-            }
+	        }
 			if (event.type == SDL_KEYDOWN){
 				
 				SDL_DestroyRenderer(renderer);
 			  	SDL_DestroyWindow(window);
 			  	SDL_Quit();
 			  	exit(0);
-            }
+	        }
 		}
 
 		SDL_RenderClear(renderer);
@@ -81,14 +90,14 @@ void UniverseManager::runSim() {
 		screen.y = 0;
 		screen.w = SCREEN_WIDTH;
 		screen.h = SCREEN_HEIGHT;
- 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderFillRect(renderer, &screen);
-	
+			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	    SDL_RenderFillRect(renderer, &screen);
+
 	    int barSize = 100; //100 pixels
 		
 
-		for(int i = 0; i <= std::min(LENGTH, 10); i++){
-			for(int j = 0; j <= std::min(WIDTH, 10); j++){
+		for(int i = 0; i < std::min(LENGTH, 10); i++){
+			for(int j = 0; j < std::min(WIDTH, 10); j++){
 				//get a galaxy
 				Galaxy * g = universe->getGalaxy(i, j);
 
@@ -151,18 +160,7 @@ void UniverseManager::runSim() {
 		//render to screen
 		SDL_RenderPresent(renderer);
 		printf("%s\n", "Rendered");
-
 	}
-     
-}
-
-void UniverseManager::printUniverse() {
-	universe->printUniverse();
-}
-
-void UniverseManager::Render(){
-
-	
 		
 }
 
