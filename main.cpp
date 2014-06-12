@@ -9,7 +9,7 @@
 
 
 int main() {
-	Universe universe = Universe(1, 1, LENGTH, WIDTH);
+	Universe universe = Universe(1, 1, 2, 2);
 
 	//Galaxy * g = universe.getGalaxy(0, 1);
 	//universe.printUniverse();

@@ -4,7 +4,7 @@
 #include <time.h> 
 #include <cilk/cilk.h>
 
-Universe::Universe(int seed, int id, int 2, int 2) {
+Universe::Universe(int seed, int id, int length, int width) {
 	_id = id;
 	_length = length;
 	_width = width;
