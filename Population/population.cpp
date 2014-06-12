@@ -205,8 +205,8 @@ vector<Event*> Population::getBehavior(Universe* universe, Galaxy* galaxy)
 	int width = WIDTH; 
 	int length = LENGTH;
 
-	int x = galaxy->getGalaxyID()/width;
-	int y = galaxy->getGalaxyID()%length;
+	int x = galaxy->getGalaxyID()%width;
+	int y = galaxy->getGalaxyID()/length;
 
 	// Determine if this is a contested galaxy
 	galaxyPopulationCounts summary = galaxy->getPopulationCounts();
