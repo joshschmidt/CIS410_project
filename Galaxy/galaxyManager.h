@@ -4,6 +4,7 @@
 #include "../Galaxy/galaxy.h"
 #include "../Population/population.h"
 #include "../Universe/universe.h"
+#include "../Universe/universeManager.h"
 #include "../structs.h"
 #include <iostream>
 #include <queue>
@@ -11,7 +12,7 @@
 #include <vector>
 
 
-
+class UniverseManager;
 
 class CompareEvent {
     public:
@@ -25,6 +26,7 @@ class CompareEvent {
 class GalaxyManager
 {
 	private:
+		UniverseManager* universeManager;
 		Galaxy * galaxy;
 		Universe * universe;
 		float sim_time;
@@ -33,12 +35,14 @@ class GalaxyManager
 		
 		 
 		std::priority_queue<Event*, std::vector<Event *>, CompareEvent> * pq;
+		std::vector<Event*> extraGalacticEvents;
 	     
 
 	public:
-		GalaxyManager(Galaxy * g, Universe * u);
+		GalaxyManager(UniverseManager* um, Galaxy * g, Universe * u);
 
 		void addEvents(std::vector<Event*> eventList);
+		void addExtragalacticEvent(Event* newEvent);
 		void handleEvent(Event * e);
 		void battle(int pID);
 		//takes a population object, galaxy ID and planet ID and then adds the population from newPop

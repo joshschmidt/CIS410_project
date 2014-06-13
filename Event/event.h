@@ -1,6 +1,9 @@
 #ifndef EVENT_H
 #define EVENT_H
 
+#define ATTACK 0
+#define EVAL 1
+
 #include "../Population/population.h"
 
 class Population;

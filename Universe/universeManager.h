@@ -10,6 +10,8 @@
 #include <vector>
 #include <cilk/cilk.h>
 #include "../structs.h"
+
+class GalaxyManager;
      
 class UniverseManager{
 	private:
@@ -19,6 +21,7 @@ class UniverseManager{
 	     
 	public:
 		UniverseManager(Universe * u);
+		void redirectEvent(int gID, Event* event);
 		void printUniverse();
 		void runSim();
 		void InitSDL();

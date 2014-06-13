@@ -7,7 +7,8 @@
 
 
 
-GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
+GalaxyManager::GalaxyManager(UniverseManager* um, Galaxy * g, Universe * u) {
+	universeManager = um;
 	galaxy = g;
 	universe = u;
 	sim_time = 0.0;
@@ -19,14 +20,11 @@ GalaxyManager::GalaxyManager(Galaxy * g, Universe * u) {
 
 void GalaxyManager::init() {
 	std::vector<Event*> eq = std::vector<Event*>();
-	//Population * p = new Population(100,100,100);
-	Event * e = new Event(1,1.0,0,0,NULL);
-	eq.push_back(e);
-	
-	//for(int i = 0; i < galaxy->getPlanetCount(); i++) {
-	//	addEvents(galaxy->getPlanet(i)->getPopulation()->getBehavior(universe, galaxy));	
-	//}
-	
+	int gID = galaxy->getGalaxyID();
+	for(int i = 0; i < galaxy->getPlanetCount(); i++) {
+		Event * e = new Event(EVAL,1.0,i,gID,NULL);
+		eq.push_back(e);	
+	}
 	addEvents(eq);
 	
 }
@@ -41,15 +39,26 @@ void GalaxyManager::addEvents(std::vector<Event*> eventList) {
 		event->setTime(sim_time + (static_cast <float> (rand()) / static_cast <float> (RAND_MAX) * 10));
 		//event->printEvent();
 		//std::cout << galaxy->getGalaxyID() << "'s Queue Size: " << pq->size() << "\n";
-		pq->push(event);
+
+		// Determine whether the event is local to this galaxy or should be sent to another one
+		if(event->getgID() == galaxy->getGalaxyID()) {
+			pq->push(event);
+			std::cout << "Local Event\n";
+		} else {
+			std::cout << "Redirecting Event\n";
+			universeManager->redirectEvent(event->getgID(), event);
+		}
 		//std::cout << pq << "\n"; 
 
 	}
 }
 
+void GalaxyManager::addExtragalacticEvent(Event* newEvent) {
+	extraGalacticEvents.push_back(newEvent);
+}
 
 void GalaxyManager::handleEvent(Event * e) {
-	printGalaxy();
+	//printGalaxy();
 
 	switch(e->getType()) {
 
@@ -57,6 +66,7 @@ void GalaxyManager::handleEvent(Event * e) {
 			// Forces arrive on a planet and a battle happens
 			moveInterplanet(e->getPopulation(), e->getgID(), e->getpID());
 			battle(e->getpID());
+
 			//printf("battle happening \n");
 			//e->printEvent();
 			break;
@@ -67,7 +77,6 @@ void GalaxyManager::handleEvent(Event * e) {
 			//e->printEvent();
 			break;
 	}
-
 }
 
 void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
@@ -81,9 +90,8 @@ void GalaxyManager::moveInterplanet(Population * newPop, int gID, int pID){
 	p->getPopulation()->setMilitary(p->getPopulation()->getMilitary()+newPop->getMilitary());
 	p->getPopulation()->setFlood(p->getPopulation()->getFlood()+newPop->getFlood());
 	p->getPopulation()->setCiv(p->getPopulation()->getCiv()+newPop->getCiv());
-
 	//generate the next event(s)
-	addEvents(p->getPopulation()->getBehavior(universe, galaxy));
+	//addEvents(p->getPopulation()->getBehavior(universe, galaxy));
 }
 
 void GalaxyManager::battle(int pID) {
@@ -106,48 +114,37 @@ void GalaxyManager::battle(int pID) {
 	humanPower = mil + (.25 * civ) + (10 * weather) + (10 * terrain) + (10 * gravity);
 	floodPower = flood + (10 / weather) + (10 / terrain) + (10 / gravity);
 
-
+	// Humans Win
 	if(humanPower > floodPower) {
-		int diff = humanPower - floodPower;
-		if(flood - diff < 0) {
-			flood = 0;
-			mil = mil * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		}
-
-		else {
-			flood = flood - diff;
-			mil = mil * .75;
-		}		
+		flood = 0;
+		mil = mil * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		std::cout << "Human Victory\n";
 
 	}
-
+	// Flood Wins
 	else {
-		int diff = floodPower - humanPower;
-		if(mil - diff < 0) {
-			mil = 0;
-			flood = flood * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-			flood += civ * .75;
-			civ = 0;
-		}
-
-		else {
-			mil = mil - diff;
-			flood = flood * .75;
-	
-		}
+		mil = 0;
+		flood = flood * static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+		flood += civ * .75;
+		civ = 0;
+		std::cout << "Flood Victory\n";
 	}
 
 	pop->setMilitary(mil);
 	pop->setFlood(flood);
 	pop->setCiv(civ);
 
-	//generate the next event(s)
-	addEvents(pop->getBehavior(universe, galaxy));
+	//addEvents(pop->getBehavior(universe, galaxy));
+	// Instead, Set the next event from this unit to be scheduled some time later
+	std::vector<Event*> events;
+	Event* newEvent = new Event(EVAL, (sim_time+10), pID, galaxy->getID(), pop);
+	events.push_back(newEvent);
+	addEvents(events);
 }
 
 void GalaxyManager::timing() {
 	if(pq->size() == 0) return;
-	printf("PQ SIZE %d\n", (int)pq->size());
+	//printf("PQ SIZE %d\n", (int)pq->size());
 	//retrive the next event from the queue
 	Event * nextEvent = pq->top();
 	//fetch the "duration" of the next event
@@ -159,7 +156,10 @@ void GalaxyManager::timing() {
 	//process the event, the next event will be generated at the end
 	handleEvent(nextEvent);
 	//remove the processed event from the queue
+	Event* killMe = pq->top();
 	pq->pop();
+	//delete killMe->getPopulation();
+	//delete killMe;
 	//deallocate memory used by event.
 	//delete &nextEvent;
 
@@ -168,10 +168,14 @@ void GalaxyManager::timing() {
 void GalaxyManager::advanceSim(int time) {
 	//keep running the simulation as long as there's time left
 
-	while(sim_time < time) {
-		printf("SIM TIME %f", sim_time);
+	while(sim_time < time && pq->size() !=0) {
+		// Handle extragalactic events
+		int size = extraGalacticEvents.size();
+		for(int i = 0; i < size; i ++) {
+			pq->push(extraGalacticEvents.front());
+			extraGalacticEvents.erase(extraGalacticEvents.begin());
+		}
 		//invoke the timing manager
 		timing();
-
 	}
 }

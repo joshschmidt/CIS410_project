@@ -25,7 +25,7 @@ UniverseManager::UniverseManager(Universe * u) {
 	managers = new std::vector<GalaxyManager*>;
     for(int i = 0; i < length; i++) {
     	for(int j = 0; j < width; j++) {
-                managers->push_back(new GalaxyManager(u->getGalaxy(i,j), universe));                
+                managers->push_back(new GalaxyManager(this, u->getGalaxy(i,j), universe));                
         	}
  
 	}
@@ -39,7 +39,11 @@ UniverseManager::UniverseManager(Universe * u) {
 	
 	InitSDL();
 }
-     
+
+void UniverseManager::redirectEvent(int gID, Event* event) {
+	managers->at(gID)->addExtragalacticEvent(event);
+}
+
 void UniverseManager::runSim() {
 
 	cilk_spawn Render();
@@ -48,9 +52,11 @@ void UniverseManager::runSim() {
 		
 
 		for(int i = 0; i < managers->size(); i++) {
-			printf("Before advanceSim: %d\n", i);
-			managers->at(i)->advanceSim(500);
-			//managers->at(i)->printGalaxy();	
+			cilk_spawn [&] {
+				printf("Before advanceSim: %d\n", i);
+				managers->at(i)->advanceSim(500);
+				//managers->at(i)->printGalaxy();
+			} ();
 		}
 
 	}
@@ -90,7 +96,7 @@ void UniverseManager::Render(){
 		screen.y = 0;
 		screen.w = SCREEN_WIDTH;
 		screen.h = SCREEN_HEIGHT;
-			SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	    SDL_RenderFillRect(renderer, &screen);
 
 	    int barSize = 100; //100 pixels
