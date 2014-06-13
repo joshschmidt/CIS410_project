@@ -4,19 +4,13 @@ CIS410_project
 A battle for life and death in the stars.
 
 ==============
+SDL2 and SDL2_TTF are installed on Mike's home directory. We've hardcoded the includes to point to that location.
 
-INSTALL SDL!!!
+On any of the NUCs, in the project root type "source loadSDL.sh"
 
-http://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+This puts the SDL and SDL_TTF libraries in your path. It also loads the Intel module to save time.
 
 
-Unzip and run the following commands in the terminal!
-
-"./configure prefix=$HOME/sdl"
-
-Then run "make" and "make install"
-
-"export LD_LIBRARY_PATH=/home/users/YOUR_USERNAME_HERE/sdl/lib"
 ==============
 
 TODO
